@@ -1,0 +1,44 @@
+@extends('layouts.user')
+
+@section('title', 'Users Management')
+
+@section('content')
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800">Users Management</h1>
+
+<div class="row">
+    <div class="col-lg">
+        @include('partials.alerts')
+        <table class="table table-hover" id="table1">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                    <td>
+                        <a href="{{route('moderator.users.edit', $user->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                        <form action="{{ route('moderator.users.destroy', $user) }}" method="POST" class="float-left ml-1">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-warning">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@endsection
