@@ -116,6 +116,8 @@
                     </div>
                 </div>
                 <!-- Ads Banner -->
+
+                <!-- big sidebar -->
                 <div class="col-lg-9 float-left pl-0 plr-0">
                     <!-- Slider -->
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -200,7 +202,10 @@
                         @yield('content')
                     </div>
                     <!-- Main Content -->
+
                 </div>
+                <!-- big sidebar -->
+
                 <!-- Sidebar -->
                 <div class="col-md-3 box-sidebar float-right bg-dark text-white">
                     <div class="box-genre-sidebar pt-1">
