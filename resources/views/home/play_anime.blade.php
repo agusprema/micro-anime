@@ -53,7 +53,7 @@
             <li><b>Votes</b> : {{ $anime->vote_anime }}</li>
             <li><b>Status</b> : {{ $anime->status_anime }}</li>
             <li><b>Type</b> : {{ $anime->type_anime }}</li>
-            <li><b>Total Episode</b> : {{ $anime->total_anime }}</li>
+            <li><b>Total Episode</b> : @if ($anime->total_anime){{$anime->total_anime}}@else{{__('Unknown')}}@endif</li>
             <li class="genre-detail"><b>Genres</b><span class="text-white"> : </span>
                 @foreach (explode(",", $anime->genre_anime) as $genre)
                 <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>,

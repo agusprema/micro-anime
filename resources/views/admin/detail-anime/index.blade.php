@@ -80,9 +80,9 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="alternativ_title" name="alternativ_title" placeholder="Alternativ Title" value="{{ old('alternativ_title') }}">
+                        <input type="text" class="form-control" id="alternative_title" name="alternative_title" placeholder="Alternativ Title" value="{{ old('alternative_title') }}">
 
-                        @error('alternativ_title')
+                        @error('alternative_title')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -114,9 +114,9 @@
 
                     <div class="form-group">
                         <select name="status_anime" id="status_anime" class="custom-select">
-                            <option value="" @if (old('vote_anime') == ''){{ __('selected') }}@endif>Select Status</option>
-                            <option value="Ongoing" @if (old('vote_anime') == 'Ongoing'){{ __('selected') }}@endif>Ongoing</option>
-                            <option value="Tamat" @if (old('vote_anime') == 'Tamat'){{ __('selected') }}@endif>Tamat</option>
+                            <option value="" @if (old('status_anime') == ''){{ __('selected') }}@endif>Select Status</option>
+                            <option value="Ongoing" @if (old('status_anime') == 'Ongoing'){{ __('selected') }}@endif>Ongoing</option>
+                            <option value="Tamat" @if (old('status_anime') == 'Tamat'){{ __('selected') }}@endif>Tamat</option>
                         </select>
 
                         @error('status_anime')
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="total_anime" name="total_anime" placeholder="Total Anime" value="{{ old('total_anime') }}">
+                        <input type="text" class="form-control" id="total_anime" name="total_anime" placeholder="Total Episode Anime" value="{{ old('total_anime') }}">
 
                         @error('total_anime')
                         <small class="text-danger">{{ $message }}</small>
@@ -179,7 +179,7 @@
                         </div>
 
                         <div style="width: 50%;" class="form-check float-left">
-                            <input class="form-check-input" type="checkbox" value="Y" id="label_new" name="label_new" checked>
+                            <input class="form-check-input" type="checkbox" value="Y" id="label_new" name="label_new" @if (old('label_hot') == 'Y'){{ __('checked') }}@elseif(!old('label_hot')){{ __('checked') }}@endif>
                             <label class="form-check-label" for="label_new">
                                 Label New Active?
                             </label>
