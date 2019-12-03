@@ -95,7 +95,7 @@ overflow: hidden;
     @if ($sb_menu->group_id == 0)
     <li class="nav-item @if (url()->full() == url($sb_menu->url))active @endif">
         <a class="nav-link pb-0" href="{{ url($sb_menu->url) }}/">
-            <i class="fas fa-fw {{ $sb_menu->icon }}"></i>
+            <i class="fa-fw {{ $sb_menu->icon }}"></i>
             <span>{{ $sb_menu->title }}</span>
         </a>
     </li>
