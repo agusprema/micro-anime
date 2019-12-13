@@ -25,10 +25,10 @@
                     <td>{{$anime->id_anime}}</td>
                     <td>
                         <a href="{{route('admin.anime.edit', $anime->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
-                        <form action="{{ route('admin.anime.destroy', $anime) }}" method="POST" class="float-left ml-1">
+                        <form action="{{ route('admin.anime.destroy', $anime) }}" method="POST" class="float-left ml-1" id="tmbl-delete-{{ $anime->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning">Delete</button>
+                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $anime->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -28,10 +28,10 @@
                     <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                     <td>
                         <a href="{{route('moderator.users.edit', $user->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
-                        <form action="{{ route('moderator.users.destroy', $user) }}" method="POST" class="float-left ml-1">
+                        <form action="{{ route('moderator.users.destroy', $user) }}" method="POST" class="float-left ml-1" id="tmbl-delete-{{ $user->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning">Delete</button>
+                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $user->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

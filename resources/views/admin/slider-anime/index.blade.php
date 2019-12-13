@@ -25,10 +25,10 @@
                     <td>{{$slider->id_anime}}</td>
                     <td>
                         <a href="{{route('admin.slider-anime.edit', $slider->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
-                        <form action="{{ route('admin.slider-anime.destroy', $slider) }}" method="POST" class="float-left ml-1">
+                        <form action="{{ route('admin.slider-anime.destroy', $slider) }}" method="POST" class="float-left ml-1" id="tmbl-delete-{{ $slider->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning">Delete</button>
+                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $slider->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -33,10 +33,10 @@
                     <td>{{ str_replace('-', " ", str_replace($episode->id_anime.'-', "",$episode->prev))}}</td>
                     <td>
                         <a href="{{route('admin.episode-anime.edit', strtolower($episode->episode))}}"><button type="button" class="btn btn-primary float-left ml-1 mb-1">Edit</button></a>
-                        <form action="{{ route('admin.episode-anime.destroy', $episode) }}" method="POST" class="float-left ml-1 mb-1">
+                        <form action="{{ route('admin.episode-anime.destroy', $episode) }}" method="POST" class="float-left ml-1 mb-1" id="tmbl-delete-{{ $episode->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning">Delete</button>
+                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $episode->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

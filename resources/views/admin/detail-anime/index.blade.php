@@ -34,10 +34,10 @@
                         <a href="{{route('admin.detail-anime.show', $detail_anime->id)}}"><button type="button" class="btn btn-success float-left ml-1 mb-1">Detail</button></a>
                         <a href="{{route('admin.episode-anime.show', $detail_anime->id_anime)}}"><button type="button" class="btn btn-dark float-left ml-1 mb-1">Episode</button></a>
                         <a href="{{route('admin.detail-anime.edit', $detail_anime->id)}}"><button type="button" class="btn btn-primary float-left ml-1 mb-1">Edit</button></a>
-                        <form action="{{ route('admin.detail-anime.destroy', $detail_anime) }}" method="POST" class="float-left ml-1 mb-1">
+                        <form action="{{ route('admin.detail-anime.destroy', $detail_anime) }}" method="POST" class="float-left ml-1 mb-1" id="tmbl-delete-{{ $detail_anime->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning">Delete</button>
+                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $detail_anime->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

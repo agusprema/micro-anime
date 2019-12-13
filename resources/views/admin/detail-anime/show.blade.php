@@ -23,10 +23,10 @@
     <div class="col-lg">
         <a href="{{route('admin.detail-anime.index')}}" class="btn btn-primary mb-3 float-left mr-1">Go back to detail anime</a>
         <a href="{{route('admin.detail-anime.edit', $detail->id)}}" class="btn btn-primary mb-3 float-left mr-1"><i class="far fa-edit mr-1"></i>Edit</a>
-        <form action="{{ route('admin.detail-anime.destroy', $detail) }}" method="POST" class="float-left mb-3 mr-1">
+        <form action="{{ route('admin.detail-anime.destroy', $detail) }}" method="POST" class="float-left mb-3 mr-1" id="tmbl-delete-{{ $detail->id }}">
             @csrf
             {{ method_field('DELETE') }}
-            <button type="submit" class="btn btn-warning tmbl-delete">Delete</button>
+            <button type="submit" class="btn btn-warning tmbl-delete tmbl-delete" value="{{ $detail->id }}">Delete</button>
         </form>
 
         <div class="clearfix"></div>
