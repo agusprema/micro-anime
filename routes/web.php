@@ -38,6 +38,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified', 'aut
     Route::resource('/anime', 'AnimeController', ['except' => ['create', 'show']]);
     Route::resource('/slider-anime', 'SliderController', ['except' => ['create', 'show']]);
     Route::resource('/detail-anime', 'DetailAnimeController', ['except' => ['create']]);
+    Route::resource('/episode-anime', 'EpisodeController', ['except' => ['create', 'index']]);
 });
 
 Route::namespace('Moderator')->prefix('moderator')->middleware(['auth', 'verified', 'auth.moderator'])->name('moderator.')->group(function () {
