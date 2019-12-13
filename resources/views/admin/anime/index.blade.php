@@ -24,11 +24,11 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{$anime->id_anime}}</td>
                     <td>
-                        <a href="{{route('admin.anime.edit', $anime->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                        <a href="{{route('admin.anime.edit', $anime->id)}}" class="btn btn-success float-left"><i class="far fa-edit mr-1"></i>Edit</a>
                         <form action="{{ route('admin.anime.destroy', $anime) }}" method="POST" class="float-left ml-1" id="tmbl-delete-{{ $anime->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $anime->id }}">Delete</button>
+                            <button type="submit" class="btn btn-danger tmbl-delete" value="{{ $anime->id }}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
                         </form>
                     </td>
                 </tr>

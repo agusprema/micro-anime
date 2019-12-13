@@ -31,13 +31,13 @@
                     <td>{{$detail_anime->title_anime}}</td>
                     <td>{{$detail_anime->alternative_title}}</td>
                     <td>
-                        <a href="{{route('admin.detail-anime.show', $detail_anime->id)}}"><button type="button" class="btn btn-success float-left ml-1 mb-1">Detail</button></a>
-                        <a href="{{route('admin.episode-anime.show', $detail_anime->id_anime)}}"><button type="button" class="btn btn-dark float-left ml-1 mb-1">Episode</button></a>
-                        <a href="{{route('admin.detail-anime.edit', $detail_anime->id)}}"><button type="button" class="btn btn-primary float-left ml-1 mb-1">Edit</button></a>
+                        <a href="{{route('admin.detail-anime.show', $detail_anime->id)}}" class="btn btn-primary float-left ml-1 mb-1"><i class="fas fa-info mr-1"></i>Detail</a>
+                        <a href="{{route('admin.episode-anime.show', $detail_anime->id_anime)}}" class="btn btn-dark float-left ml-1 mb-1"><i class="fas fa-peace mr-1"></i>Episode</a>
+                        <a href="{{route('admin.detail-anime.edit', $detail_anime->id)}}" class="btn btn-success float-left ml-1 mb-1"><i class="far fa-edit mr-1"></i>Edit</a>
                         <form action="{{ route('admin.detail-anime.destroy', $detail_anime) }}" method="POST" class="float-left ml-1 mb-1" id="tmbl-delete-{{ $detail_anime->id }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-warning tmbl-delete" value="{{ $detail_anime->id }}">Delete</button>
+                            <button type="submit" class="btn btn-danger tmbl-delete" value="{{ $detail_anime->id }}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
                         </form>
                     </td>
                 </tr>
