@@ -148,9 +148,9 @@ class HomeController extends Controller
         $anime = detail_animes::where('id_anime', $request)->first();
         $episodes = episode_animes::where('id_anime', $request)->orderBy('episode', 'desc')->get();
         if (Auth::check() && $anime) {
-            $list_users = list_user_animes::where('id_user', Auth::user()->id_user)->first();
+            $list_users = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $anime->id_anime)->first();
 
-            if (in_array($anime->id_anime, explode(',', $list_users->id_animes))) {
+            if ($list_users) {
                 $action[0] = 'remove-list';
                 $action[1] = 'Remove list';
             } else {

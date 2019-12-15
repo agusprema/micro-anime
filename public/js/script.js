@@ -3,6 +3,12 @@
 !function (e) { var t = /(^|&lt;|\s)(www\..+?\..+?)(\s|&gt;|$)/g, a = /(^|&lt;|\s)(((https?|ftp):\/\/|mailto:).+?)(\s|&gt;|$)/g; e.fn.linkify = function (r) { r = e.extend({ className: "linkified", target: "_self", nofollow: !1 }, r); var l = r.nofollow ? ' rel="nofollow"' : ""; return linkifyThis = function () { for (var n = this.childNodes, i = n.length; i--;) { var s = n[i]; if (3 == s.nodeType) { var f = e.trim(s.nodeValue); if (f) { var g = String.format('$1<a href="http://$2" target="{0}" class="{1}"{2}>$2</a>$3', r.target, r.className, l), o = String.format('$1<a href="$2" target="{0}" class="{1}"{2}>$2</a>$5', r.target, r.className, l); f = f.replace(/&/g, "&").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(t, g).replace(a, o), e(s).after(f).remove() } } else 1 != s.nodeType || /^(a|button|textarea)$/i.test(s.tagName) || linkifyThis.call(s) } }, String.format = function (e) { if (arguments.length <= 1) return e; for (var t = arguments.length - 2, a = 0; t >= a; a++) e = e.replace(new RegExp("\\{" + a + "\\}", "gi"), arguments[a + 1]); return e }, this.each(linkifyThis) } }(jQuery);
 !function(t){t.lazy(["frame","iframe"],"iframe",function(r,a){var e=this;if("iframe"===r[0].tagName.toLowerCase()){var o=r.attr("data-error-detect");"true"!==o&&"1"!==o?(r.attr("src",r.attr("data-src")),e.config("removeAttribute")&&r.removeAttr("data-src data-error-detect")):t.ajax({url:r.attr("data-src"),dataType:"html",crossDomain:!0,xhrFields:{withCredentials:!0},success:function(t){r.html(t).attr("src",r.attr("data-src")),e.config("removeAttribute")&&r.removeAttr("data-src data-error-detect")},error:function(){a(!1)}})}else a(!1)})}(window.jQuery||window.Zepto);
 $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var base_url = $('meta[name="url"]').attr("content")+'/';
     $(".player").click(function(l) {
         $(this);
@@ -60,7 +66,36 @@ $(document).ready(function(){
     $(".ar-list").appendTo(".jssocials-shares");
 
 
-    function sweat_success_list(){Swal.fire({position:"center",type:"success",title:"Your list has been saved",showConfirmButton:!1,timer:1500})}function sweat_error_list(){Swal.fire({position:"center",type:"error",title:"Oops...",text:"Something went wrong!",showConfirmButton:!1,timer:1500})}$(document).on("click",".ar-list.add-list",function(t){t.preventDefault();var e=$(this).data("anim"),s=$(this);$.getJSON(base_url+"api/check_login/",function(t){"true"==t.login?$.ajax({url:base_url+"api/add_to_list/"+e,type:"GET",success:function(t){"success"==t?(s.removeClass("add-list"),s.addClass("remove-list"),s.attr("title","Remove List"),sweat_success_list()):sweat_error_list()}}):sweat_login_list()})}),$(document).on("click",".ar-list.remove-list",function(t){t.preventDefault();var e=$(this).data("anim"),s=$(this);$.getJSON(base_url+"api/check_login/",function(t){"true"==t.login?$.ajax({url:base_url+"api/remove_to_list/"+e,type:"GET",success:function(t){"success"==t?(s.removeClass("remove-list"),s.addClass("add-list"),s.attr("title","Add List"),sweat_success_list()):sweat_error_list()}}):sweat_login_list()})});
+    function sweat_success_list(){Swal.fire({position:"center",type:"success",title:"Your list has been saved",showConfirmButton:!1,timer:1500})}function sweat_error_list(){Swal.fire({position:"center",type:"error",title:"Oops...",text:"Something went wrong!",showConfirmButton:!1,timer:1500})};
+
+    $(document).on("click", ".ar-list.add-list", function(t) {
+        t.preventDefault();
+        var e = $(this).data("anim"),
+            s = $(this)
+
+        $.getJSON(base_url + "api/check_login/", function(t) {
+            "true" == t.login ? $.ajax({
+                type: "get",
+                url: base_url + "api/add-list/" +e,
+                success: function(g) {
+                    g.error == "false" ? (s.removeClass("add-list"), s.addClass("remove-list"), s.attr("title", "Remove List"), sweat_success_list()) : sweat_error_list()
+                }
+            }) : sweat_login_list()
+        })
+    }), $(document).on("click", ".ar-list.remove-list", function(t) {
+        t.preventDefault();
+        var e = $(this).data("anim"),
+            s = $(this);
+        $.getJSON(base_url + "api/check_login/", function(t) {
+            "true" == t.login ? $.ajax({
+                type: "get",
+                url: base_url + "api/remove-list/" + e,
+                success: function(g) {
+                    "false" == g.error ? (s.removeClass("remove-list"), s.addClass("add-list"), s.attr("title", "Add List"), sweat_success_list()) : sweat_error_list()
+                }
+            }) : sweat_login_list()
+        })
+    });
 
     $("#login").click(function(e){
         e.preventDefault();

@@ -25,95 +25,88 @@ class ApiController extends Controller
         }
     }
 
-    public function add_list(Request $request)
+    public function RuleAnime($value)
+    {
+        $anime_hash = strtolower(str_replace(" ", "-", str_replace("`", "", str_replace("~", "", str_replace(" -", "", str_replace("'", "", preg_replace('~[\\\\/:*?!@#$%^&()"<>,|.]~', '', $value)))))));
+        return $anime_hash;
+    }
+
+    public function add_list($id)
     {
         if (!Auth::check()) {
             return response()->json([
-                'login' => 'false'
+                'login' => 'false',
+                'error' => 'You must be signed.'
             ]);
         } else {
-            $validator = Validator::make(request()->all(), [
-                'id_animes'  => 'required'
-            ]);
-
-            if ($validator->fails()) {
+            if (!$id) {
                 return response()->json([
                     'login' => 'true',
-                    'error' => $validator->messages()->first()
+                    'error' => 'The id animes field is required.'
                 ]);
             } else {
-                $id_anime = detail_animes::where('id_anime', $request->id_animes)->first();
+                $id_anime = detail_animes::where('id_anime', $this->RuleAnime($id))->first();
                 if ($id_anime) {
 
-                    $anime = list_user_animes::where('id_user', Auth::user()->id_user)->first();
-                    if (in_array($request->id_animes, explode(",", $anime->id_animes))) {
+                    $anime = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $this->RuleAnime($id))->first();
+
+                    if($anime){
                         return response()->json([
                             'login' => 'true',
-                            'error' => 'true'
+                            'error' => 'The anime has been bookmarked.'
                         ]);
                     } else {
-                        if ($anime->id_animes != "") {
-                            $array_anime = "$anime->id_animes,$request->id_animes";
-                        } else {
-                            $array_anime = "$request->id_animes";
-                        }
-
-                        $list_anime = list_user_animes::where('id_user', Auth::user()->id_user)
-                            ->update(['id_animes' => $array_anime]);
+                        $bookmark               = new list_user_animes;
+                        $bookmark->id_user      = Auth::user()->id_user;
+                        $bookmark->id_anime     = $this->RuleAnime($id);
+                        $bookmark->save();
 
                         return response()->json([
                             'login' => 'true',
-                            'error' => $validator->messages()->first()
+                            'error' => 'false'
                         ]);
                     }
+                } else {
+                    return response()->json([
+                        'login' => 'true',
+                        'error' => 'anime not on the list.'
+                    ]);
                 }
             }
         }
     }
 
-    public function remove_list(Request $request)
+    public function remove_list($id)
     {
         if (!Auth::check()) {
             return response()->json([
-                'login' => 'false'
+                'login' => 'false',
+                'error' => 'You must be signed.'
             ]);
         } else {
-            $validator = Validator::make(request()->all(), [
-                'id_animes'  => 'required'
-            ]);
-
-            if ($validator->fails()) {
+            if (!$id) {
                 return response()->json([
                     'login' => 'true',
-                    'error' => $validator->messages()->first()
+                    'error' => 'The id animes field is required.'
                 ]);
             } else {
-                $id_anime = detail_animes::where('id_anime', $request->id_animes)->first();
+                $id_anime = detail_animes::where('id_anime', $id)->first();
                 if ($id_anime) {
 
-                    $anime = list_user_animes::where('id_user', Auth::user()->id_user)->first();
-                    if (in_array($request->id_animes, explode(",", $anime->id_animes))) {
-                        $array_teman = explode(",", $anime->id_animes);
+                    $anime = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $this->RuleAnime($id))->first();
+                    if ($anime) {
 
-                        foreach ($array_teman as $key => $value) {
-                            if ($value == $request->id_animes) {
-                                unset($array_teman[$key]);
-                            }
-                        }
-
-                        $array_teman_baru = implode(",", $array_teman);
-
-                        $list_anime = list_user_animes::where('id_user', Auth::user()->id_user)
-                            ->update(['id_animes' => $array_teman_baru]);
+                        $bookmark       = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $this->RuleAnime($id))->first();
+                        $bookmark->delete();
 
                         return response()->json([
                             'login' => 'true',
-                            'error' => $validator->messages()->first()
+                            'error' => 'false'
                         ]);
                     } else {
                         return response()->json([
                             'login' => 'true',
-                            'error' => 'true'
+                            'error' => 'Anime has not been bookmarked.'
                         ]);
                     }
                 }

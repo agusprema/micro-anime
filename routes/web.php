@@ -30,6 +30,8 @@ Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallb
 
 Route::namespace('User')->prefix('user')->middleware(['auth', 'verified'])->name('user.')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+
+    Route::resource('/bookmark-anime', 'BookmarkController', ['except' => ['create', 'show' , 'edit', 'store', 'update', 'destroy']]);
 });
 
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified', 'auth.admin'])->name('admin.')->group(function () {
@@ -56,8 +58,9 @@ Route::namespace('Moderator')->prefix('moderator')->middleware(['auth', 'verifie
 });
 
 Route::namespace('Api')->prefix('api')->name('api.')->group(function () {
-    Route::post('/add-list', 'ApiController@add_list');
-    Route::post('/remove-list', 'ApiController@remove_list');
+    Route::get('/check_login', 'ApiController@check_login');
+    Route::get('/add-list/{id}', 'ApiController@add_list');
+    Route::get('/remove-list/{id}', 'ApiController@remove_list');
     Route::get('/visitor', 'ApiController@visitor_counter')->middleware(['auth', 'verified', 'auth.moderator']);
 });
 
