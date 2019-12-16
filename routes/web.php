@@ -52,6 +52,7 @@ Route::namespace('Moderator')->prefix('moderator')->middleware(['auth', 'verifie
     Route::resource('/submenu', 'SubMenuController', ['except' => ['create', 'show']]);
     Route::resource('/group-menu', 'GroupMenuController', ['except' => ['create', 'show']]);
     Route::resource('/users', 'UsersController', ['except' => ['create', 'show']]);
+    Route::resource('/ads-banner', 'AdsBannerController', ['except' => ['create', 'show']]);
 
     Route::get('/roleaccess/{id}', 'RoleAccesscontroller@index');
     Route::post('/changeaccess', 'RoleAccesscontroller@store');
