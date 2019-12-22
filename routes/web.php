@@ -31,6 +31,8 @@ Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallb
 Route::namespace('User')->prefix('user')->middleware(['auth', 'verified'])->name('user.')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('/edit-profile', 'EditProfileController@index');
+    Route::post('/edit-profile', 'EditProfileController@update');
     Route::resource('/bookmark-anime', 'BookmarkController', ['except' => ['create', 'show' , 'edit', 'store', 'update', 'destroy']]);
 });
 

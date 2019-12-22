@@ -188,9 +188,14 @@ overflow: hidden;
                     My Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ url('/user/list-anime') }}">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Liist Anime
+                <a class="dropdown-item" href="{{ url('/user/edit-profile') }}">
+                    <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Edit Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url('/user/bookmark-anime') }}">
+                    <i class="fas fa-bookmark fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Bookmark Anime
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
