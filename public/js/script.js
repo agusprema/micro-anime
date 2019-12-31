@@ -14,10 +14,19 @@ $(document).ready(function(){
         $(this);
         var r = $(this).data("src"),
             o = $(this).children("img").height(),
-            e = $(this).children("img").width();
+            e = $(this).children("img").width(),
+            g = $(this).data("anime"),
+            j = $(this).data("episode");
         $(".player").replaceWith('<iframe class="hold-player player" data-src="' + r + '" width="' + e + '" height="' + o + '" frameBorder="0" src="' + r + '" frameborder="0" allowfullscreen></iframe>');
         $.Lazy('iFrame', function(element, response) {
             var imageBase = this.config('imageBase');
+        });
+        $.ajax({
+            type: "get",
+            url: base_url + "api/hot-views/" + g + "/" + j,
+            success: function(m) {
+                console.log(m);
+            }
         });
     })
     $(".page-scroll").on("click",function(l){var r=$(this).attr("href"),o=$(r);$("html , body").animate({scrollTop:o.offset().top-60}),l.preventDefault()}),$(window).scroll(function(){100<$(this).scrollTop()?$(".scrollToTop").fadeIn():$(".scrollToTop").fadeOut()});$(".scrollToTop").click(function(){return $("html, body").animate({scrollTop:0},800),!1}),$(".alert").linkify()

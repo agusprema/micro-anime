@@ -11,7 +11,7 @@
     @endforeach
 </div>
 
-<div data-src="{{ $episode->video }}" class="player mb-2" id="player">
+<div data-src="{{ $episode->video }}" data-anime="{{ $episode->id_anime }}" data-episode="{{ $episode->episode }}" class="player mb-2" id="player">
     @if ($anime->background_anime)
     <img style="max-height: 450px" class="img-fluid" src="{{ $anime->background_anime }}" alt="{{ $anime->title_anime }}" title="{{ $anime->title_anime }}" />
     @else
