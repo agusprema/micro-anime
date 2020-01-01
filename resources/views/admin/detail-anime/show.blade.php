@@ -41,7 +41,7 @@
                         <p class="card-title b-cs"><b>Title Anime </b>: {{ $detail->title_anime }}</p>
                         <p class="card-title b-cs"><b>Alternativ </b>: {{ $detail->alternative_anime }}</p>
                         <p class="card-text b-cs"><b>Rating Anime </b>: {{ $detail->rating_anime }}</p>
-                        <p class="card-text b-cs"><b>Vote Anime </b>: {{ $detail->vote_anime }}</p>
+                        <p class="card-text b-cs"><b>Vote Anime </b>: {!! App\Helpers\AnimeLabelHelper::instance()->count_list_anime($detail->id_anime) !!}</p>
                         <p class="card-text b-cs"><b>Status Anime </b>: {{ $detail->status_anime }}</p>
                         <p class="card-text b-cs"><b>Type Anime </b>: {{ $detail->type_anime }}</p>
                         <p class="card-text b-cs"><b>Total Episode </b>: @if ($detail->total_anime){{$detail->total_anime}}@else{{__('Unknown')}}@endif</p>

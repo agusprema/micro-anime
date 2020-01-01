@@ -15,9 +15,15 @@
                     <img data-src="{{ $senin->image_anime }}" alt="{{ $senin->title_anime }}">
                     <div class="title-calendar">{{ $senin->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($senin->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($senin->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($senin->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $senin->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($senin->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($senin->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -38,9 +44,15 @@
                     <img data-src="{{ $selasa->image_anime }}" alt="{{ $selasa->title_anime }}">
                     <div class="title-calendar">{{ $selasa->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($selasa->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($selasa->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($selasa->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $selasa->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($selasa->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($selasa->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -61,9 +73,15 @@
                     <img data-src="{{ $rabu->image_anime }}" alt="{{ $rabu->title_anime }}">
                     <div class="title-calendar">{{ $rabu->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($rabu->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($rabu->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($rabu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $rabu->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($rabu->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($rabu->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -84,9 +102,15 @@
                     <img data-src="{{ $kamis->image_anime }}" alt="{{ $kamis->title_anime }}">
                     <div class="title-calendar">{{ $kamis->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($kamis->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($kamis->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($kamis->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $kamis->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($kamis->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($kamis->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -107,9 +131,15 @@
                     <img data-src="{{ $jumat->image_anime }}" alt="{{ $jumat->title_anime }}">
                     <div class="title-calendar">{{ $jumat->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($jumat->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($jumat->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($jumat->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $jumat->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($jumat->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($jumat->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -130,9 +160,15 @@
                     <img data-src="{{ $sabtu->image_anime }}" alt="{{ $sabtu->title_anime }}">
                     <div class="title-calendar">{{ $sabtu->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($sabtu->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($sabtu->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($sabtu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $sabtu->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($sabtu->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($sabtu->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -153,9 +189,15 @@
                     <img data-src="{{ $minggu->image_anime }}" alt="{{ $minggu->title_anime }}">
                     <div class="title-calendar">{{ $minggu->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($minggu->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($minggu->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($minggu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $minggu->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($minggu->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($minggu->id_anime) !!}
+                </div>
             </div>
             @endforeach
 
@@ -176,9 +218,15 @@
                     <img data-src="{{ $random->image_anime }}" alt="{{ $random->title_anime }}">
                     <div class="title-calendar">{{ $random->title_anime }}</div>
                 </a>
-                <div class="label-ongoing text-white">Ongoing</div>
-                @if ($random->label_hot == 'Y')<div class="label-hot">H</div>@endif
-                @if ($random->label_new == 'Y')<div class="label-new">N</div>@endif
+                @if ($random->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                <?php $episode = \DB::table('episode_animes')->where('id_anime', $random->id_anime)->count(); ?>
+                <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                <div class="label-box">
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($random->id_anime) !!}
+                    {!! App\Helpers\AnimeLabelHelper::instance()->label_new($random->id_anime) !!}
+                </div>
             </div>
             @endforeach
 

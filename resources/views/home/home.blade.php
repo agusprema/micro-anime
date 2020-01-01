@@ -12,25 +12,15 @@
             <div class="title-post">{{ $anime->title_anime }}</div>
         </a>
 
-        @if ($anime->status_anime == 'Tamat')
-        <div class="label-tamat text-white">Tamat</div>
-        @else
-        <div class="label-ongoing text-white">Ongoing</div>
-        @endif
+        @if ($anime->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
         <?php $episode = \DB::table('episode_animes')->where('id_anime', $anime->id_anime)->count(); ?>
-        @if ($anime->label_hot !== 'Y')
-        <div class="label-episode-left text-white">Episode {{ $episode }}</div>
-        @elseif ($anime->label_new !== 'Y')
         <div class="label-episode-right text-white">Episode {{ $episode }}</div>
-        @endif
 
-        @if ($anime->label_hot == 'Y')
-        <div class="label-hot">H</div>
-        @endif
-        @if ($anime->label_new == 'Y')
-        <div class="label-new">N</div>
-        @endif
+        <div class="label-box">
+            {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($anime->id_anime) !!}
+            {!! App\Helpers\AnimeLabelHelper::instance()->label_new($anime->id_anime) !!}
+        </div>
     </div>
     @endforeach
 @else

@@ -54,7 +54,6 @@ class DetailAnimeController extends Controller
             'title_anime' => 'required',
             'summary_anime' => 'required',
             'rating_anime' => 'numeric',
-            'vote_anime' => 'integer',
             'status_anime' => 'required|in:Ongoing,Tamat',
             'type_anime' => 'required|in:TV,OVA,Movie',
             'total_anime' => 'integer',
@@ -64,23 +63,17 @@ class DetailAnimeController extends Controller
             'background_anime' => 'nullable'
         ]);
 
-        if($request->label_hot){$label_hot = $request->label_hot;} else {$label_hot = 'N';}
-        if($request->label_new){$label_new = $request->label_new;} else {$label_new = 'N';}
-
         $detail_animes                      = new detail_animes;
         $detail_animes->id_anime            = $this->RuleAnime($request->id_anime);
         $detail_animes->title_anime         = $request->title_anime;
         $detail_animes->alternative_title   = $request->alternative_title;
         $detail_animes->summary_anime       = $request->summary_anime;
         $detail_animes->rating_anime        = $request->rating_anime;
-        $detail_animes->vote_anime          = $request->vote_anime;
         $detail_animes->status_anime        = $request->status_anime;
         $detail_animes->type_anime          = $request->type_anime;
         $detail_animes->total_anime         = $request->total_anime;
         $detail_animes->genre_anime         = $request->genre_anime;
         $detail_animes->jadwal_anime        = $request->jadwal_anime;
-        $detail_animes->label_hot           = $label_hot;
-        $detail_animes->label_new           = $label_new;
         $detail_animes->image_anime         = $request->image_anime;
         $detail_animes->background_anime    = $request->background_anime;
         $detail_animes->author              = Auth::user()->email;
@@ -131,7 +124,6 @@ class DetailAnimeController extends Controller
             'title_anime' => 'required',
             'summary_anime' => 'required',
             'rating_anime' => 'numeric',
-            'vote_anime' => 'integer',
             'status_anime' => 'required|in:Ongoing,Tamat',
             'type_anime' => 'required|in:TV,OVA,Movie',
             'total_anime' => 'integer',
@@ -141,23 +133,17 @@ class DetailAnimeController extends Controller
             'background_anime' => 'nullable'
         ]);
 
-        if($request->label_hot){$label_hot = $request->label_hot;} else {$label_hot = 'N';}
-        if($request->label_new){$label_new = $request->label_new;} else {$label_new = 'N';}
-
         $detail_animes                      = detail_animes::find($id);
         $detail_animes->id_anime            = $this->RuleAnime($request->id_anime);
         $detail_animes->title_anime         = $request->title_anime;
         $detail_animes->alternative_title   = $request->alternative_title;
         $detail_animes->summary_anime       = $request->summary_anime;
         $detail_animes->rating_anime        = $request->rating_anime;
-        $detail_animes->vote_anime          = $request->vote_anime;
         $detail_animes->status_anime        = $request->status_anime;
         $detail_animes->type_anime          = $request->type_anime;
         $detail_animes->total_anime         = $request->total_anime;
         $detail_animes->genre_anime         = $request->genre_anime;
         $detail_animes->jadwal_anime        = $request->jadwal_anime;
-        $detail_animes->label_hot           = $label_hot;
-        $detail_animes->label_new           = $label_new;
         $detail_animes->image_anime         = $request->image_anime;
         $detail_animes->background_anime    = $request->background_anime;
         $detail_animes->author              = Auth::user()->email;

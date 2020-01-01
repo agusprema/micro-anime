@@ -188,12 +188,15 @@
                                 <img data-src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
                                 <div class="title-tamat">{{ $tamat_box->title_anime }}</div>
                             </a>
-                            <div class="label-tamat text-white">{{ $tamat_box->status_anime }}</div>
-                            @if ($tamat_box->label_hot == 'Y')
-                            <div class="label-hot">H</div>
-                            @endif
-                            @php $episode = \DB::table('episode_animes')->where('id_anime', $tamat_box->id_anime)->count();@endphp
+                            @if ($tamat_box->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
+
+                            <?php $episode = \DB::table('episode_animes')->where('id_anime', $tamat_box->id_anime)->count(); ?>
                             <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+
+                            <div class="label-box">
+                                {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($tamat_box->id_anime) !!}
+                                {!! App\Helpers\AnimeLabelHelper::instance()->label_new($tamat_box->id_anime) !!}
+                            </div>
                         </div>
                         @endforeach
 
@@ -248,13 +251,11 @@
                         <div class="content-hot-sidebar">
                             <div class="box-content-sidebar pb-2">
 
-                                @foreach (\DB::table('detail_animes')->where('label_hot', 'Y')->orderBy('id', 'DESC')->limit(5)->get() as $hot_sidebar)
+                                @foreach (\DB::table('detail_animes')->join('amount_hot_animes', 'detail_animes.id_anime', '=', 'amount_hot_animes.id_anime')->orderBy('amount_hot_animes.amount_views', 'DESC')->limit(5)->get() as $hot_sidebar)
                                     <div class="hot-sidebar">
                                         <div class="col-md-3 img-hot-sidebar p-0 pt-1 pb-1 pr-1 float-left">
                                             <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}"><img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}"></a>
-                                            @if ($hot_sidebar->label_new == 'Y')
-                                            <div class="label-new label-new-hot">N</div>
-                                            @endif
+                                            {!! App\Helpers\AnimeLabelHelper::instance()->label_new($hot_sidebar->id_anime, 1) !!}
                                         </div>
 
                                         <div style="height:20px;" class="title-slider title-sidebar text-uppercase"><a href="{{ $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}">{{ $hot_sidebar->title_anime }}</a></div>

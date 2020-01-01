@@ -23,7 +23,7 @@
         <ul>
             <li><b>Alternative</b> : {{ $anime->alternative_title }}</li>
             <li><b>Rating</b> : {{ $anime->rating_anime }}</li>
-            <li><b>Votes</b> : {{ $anime->vote_anime }}</li>
+            <li><b>Votes</b> : {!! App\Helpers\AnimeLabelHelper::instance()->count_list_anime($anime->id_anime) !!}</li>
             <li><b>Status</b> : {{ $anime->status_anime }}</li>
             <li><b>Type</b> : {{ $anime->type_anime }}</li>
             <li><b>Total Episode</b> : @if ($anime->total_anime){{$anime->total_anime}}@else{{__('Unknown')}}@endif</li>

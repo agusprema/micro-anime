@@ -64,16 +64,6 @@
             </div>
 
             <div class="form-group row">
-                <label for="vote_anime" class="col-sm-2 col-form-label">Vote Anime</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="vote_anime" name="vote_anime" value="{{ $detail->vote_anime ?? old('vote_anime') }}">
-                    @error('vote_anime')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label for="status_anime" class="col-sm-2 col-form-label">Status Anime</label>
                 <div class="col-sm-10">
                     <select name="status_anime" id="status_anime" class="custom-select">
@@ -142,26 +132,6 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="type_anime" class="col-sm-2 col-form-label">Label</label>
-                <div class="col-sm-10">
-                    <div style="width: 50%;" class="form-check float-left">
-                        <input class="form-check-input" type="checkbox" value="Y" id="label_hot" name="label_hot" @if ($detail->label_hot == 'Y'){{ __('checked') }}@endif>
-                        <label class="form-check-label" for="label_hot">
-                            Label Hot Active?
-                        </label>
-                    </div>
-
-                    <div style="width: 50%;" class="form-check float-left">
-                        <input class="form-check-input" type="checkbox" value="Y" id="label_new" name="label_new" @if ($detail->label_new == 'Y'){{ __('checked') }}@endif>
-                        <label class="form-check-label" for="label_new">
-                            Label New Active?
-                        </label>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
 
