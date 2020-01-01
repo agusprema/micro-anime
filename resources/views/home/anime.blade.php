@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', $anime->title_anime ?? 'Anime Not Found'.' | ')
+@section('title', $anime->title_anime . ' | ' ?? 'Anime Not Found'.' | ')
 @section('content')
 <!-- post -->
 @if ($anime)
