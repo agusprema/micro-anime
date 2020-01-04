@@ -246,6 +246,26 @@
                         </a>
                     </div>
 
+                    @guest
+                    @else
+                    @php
+                        $hs = \DB::table('history_users')->where('id_user', Auth::user()->id_user)->orderBy('id', 'DESC')->get();
+                    @endphp
+                    @if ($hs->count() !== 0)
+                    <div class="box-chat-sidebar pt-1">
+                        <div class="title-widget"><i class="fas fa-history text-primary pr-1"></i><span>History</span></div>
+
+                        <div class="history">
+                            <ul>
+                                @foreach ( $hs as $history)
+                                <li><a title="{{ ucwords(str_replace('-', ' ', $history->id_episode ?? 'Anime Not Found')) }}" href="{{ url('episode', $history->id_episode) }}">{{ ucwords(str_replace('-', ' ', $history->id_episode ?? 'Anime Not Found')) }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
+                    @endguest
+
                     <div class="box-hot-sidebar pt-1">
                         <div class="title-widget"><i class="fab fa-hotjar text-danger pr-1"></i><span>Weekly HOT</span></div>
                         <div class="content-hot-sidebar">

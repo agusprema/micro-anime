@@ -8,6 +8,12 @@ use App\list_user_animes;
 
 class AnimeLabelHelper
 {
+    public function RuleAnime($value)
+    {
+        $anime_hash = strtolower(str_replace(" ", "-", str_replace("`", "", str_replace("~", "", str_replace(" -", "", str_replace("'", "", preg_replace('~[\\\\/:*?!@#$%^&()"<>,|.]~', '', $value)))))));
+        return $anime_hash;
+    }
+
     public function label_hot($id)
     {
         $label_hot_q = amount_hot_animes::orderBy('amount_views', 'DESC')->limit(15, 0)->get();

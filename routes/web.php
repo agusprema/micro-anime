@@ -65,6 +65,7 @@ Route::namespace('Api')->prefix('api')->name('api.')->group(function () {
     Route::get('/add-list/{id}', 'ApiController@add_list');
     Route::get('/remove-list/{id}', 'ApiController@remove_list');
     Route::get('/hot-views/{id}/{eps}', 'ApiController@hot_views');
+    Route::get('/history-user/{eps}', 'ApiController@history_anime');
     Route::get('/visitor', 'ApiController@visitor_counter')->middleware(['auth', 'verified', 'auth.moderator']);
 });
 

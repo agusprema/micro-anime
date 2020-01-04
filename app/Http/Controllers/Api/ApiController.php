@@ -13,7 +13,7 @@ use App\amount_hot_animes;
 use App\amount_hot_episodes;
 use App\episode_animes;
 use App\hot_animes;
-use Carbon\Carbon;
+use App\History_Users;
 
 class ApiController extends Controller
 {
@@ -219,6 +219,35 @@ class ApiController extends Controller
                 'login' => 'false',
                 'error' => 'The id animes or episode anime field is required.'
             ]);
+        }
+    }
+
+    public function history_anime($id)
+    {
+        $id                 = $this->RuleAnime($id);
+        $user               = Auth::user()->id_user;
+        $episode            = episode_animes::where('episode', $id)->first();
+        $history_user       = History_Users::where('id_user', $user)->orderBy('id', 'ASC')->limit(1)->get();
+        $history_user_count = History_Users::where('id_user', $user)->get()->count();
+        $c_hs               = History_Users::where('id_user', $user)->where('id_episode', $id)->first();
+
+        if (Auth::check() && $episode) {
+            if($c_hs){
+                History_Users::destroy($c_hs->id);
+
+                $history_user_q             = new History_Users;
+                $history_user_q->id_user    = $user;
+                $history_user_q->id_episode = $id;
+                $history_user_q->save();
+            } else {
+                if($history_user_count > 9){
+                    History_Users::destroy($history_user->id);
+                }
+                $history_user_q             = new History_Users;
+                $history_user_q->id_user    = $user;
+                $history_user_q->id_episode = $id;
+                $history_user_q->save();
+            }
         }
     }
 }

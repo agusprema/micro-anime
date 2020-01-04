@@ -28,6 +28,13 @@ $(document).ready(function(){
                 console.log(m);
             }
         });
+        $.ajax({
+            type: "get",
+            url: base_url + "api/history-user/" + j,
+            success: function(m) {
+                console.log(m);
+            }
+        });
     })
     $(".page-scroll").on("click",function(l){var r=$(this).attr("href"),o=$(r);$("html , body").animate({scrollTop:o.offset().top-60}),l.preventDefault()}),$(window).scroll(function(){100<$(this).scrollTop()?$(".scrollToTop").fadeIn():$(".scrollToTop").fadeOut()});$(".scrollToTop").click(function(){return $("html, body").animate({scrollTop:0},800),!1}),$(".alert").linkify()
     var arr_before=$("[rel=prev]")[0]?$("[rel=prev]")[0].href:"#",arr_after=$("[rel=next]")[0]?$("[rel=next]")[0].href:"#";document.onkeydown=function(e){switch(e.keyCode){case 37:location.href=arr_before;break;case 39:location.href=arr_after}};$("#share").jsSocials({showLabel:!1,showCount:!1,shares:["email","twitter","facebook","googleplus","whatsapp"]});
