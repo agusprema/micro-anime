@@ -114,6 +114,11 @@ class ApiController extends Controller
                             'error' => 'Anime has not been bookmarked.'
                         ]);
                     }
+                } else {
+                    return response()->json([
+                        'login' => 'true',
+                        'error' => 'anime not on the list.'
+                    ]);
                 }
             }
         }
