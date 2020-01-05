@@ -46,6 +46,30 @@ class AnimeLabelHelper
         return list_user_animes::where('id_anime', $id)->get()->count();
     }
 
+    public function season_anime()
+    {
+        $date           = explode("-", date('m-Y'));
+        $in_list_spring = ['03', '04', '05'];
+        $in_list_summer = ['06', '07', '08'];
+        $in_list_fall   = ['09', '10', '11'];
+        $in_list_winter = ['12', '01', '02'];
+        $aaa            = ['01', '02'];
+
+        if ( in_array($date[0], $in_list_spring) ){
+            return 'Spring ' . $date[1];
+        } elseif ( in_array($date[0], $in_list_summer) ) {
+            return 'Summer ' . $date[1];
+        } elseif ( in_array($date[0], $in_list_fall) ) {
+            return 'Fall ' . $date[1];
+        } elseif ( in_array($date[0], $in_list_winter) ) {
+            if ( in_array($date[0], $aaa) ) {
+                return 'Winter ' . ($date[1] - 1);
+            } else {
+                return 'Winter ' . $date[1];
+            }
+        }
+    }
+
     public static function instance()
     {
         return new AnimeLabelHelper();

@@ -267,11 +267,11 @@
                     @endguest
 
                     <div class="box-hot-sidebar pt-1">
-                        <div class="title-widget"><i class="fab fa-hotjar text-danger pr-1"></i><span>Weekly HOT</span></div>
+                        <div class="title-widget"><i class="fab fa-hotjar text-danger pr-1"></i><span>HOT {{ App\Helpers\AnimeLabelHelper::instance()->season_anime() }}</span></div>
                         <div class="content-hot-sidebar">
                             <div class="box-content-sidebar pb-2">
 
-                                @foreach (\DB::table('detail_animes')->join('amount_hot_animes', 'detail_animes.id_anime', '=', 'amount_hot_animes.id_anime')->orderBy('amount_hot_animes.amount_views', 'DESC')->limit(5)->get() as $hot_sidebar)
+                                @foreach (\DB::table('detail_animes')->join('amount_hot_animes', 'detail_animes.id_anime', '=', 'amount_hot_animes.id_anime')->orderBy('amount_hot_animes.amount_views', 'DESC')->where('amount_hot_animes.season_anime', App\Helpers\AnimeLabelHelper::instance()->season_anime())->limit(5)->get() as $hot_sidebar)
                                     <div class="hot-sidebar">
                                         <div class="col-md-3 img-hot-sidebar p-0 pt-1 pb-1 pr-1 float-left">
                                             <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}"><img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}"></a>

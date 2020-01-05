@@ -14,6 +14,7 @@ use App\amount_hot_episodes;
 use App\episode_animes;
 use App\hot_animes;
 use App\History_Users;
+use App\Helpers\AnimeLabelHelper;
 
 class ApiController extends Controller
 {
@@ -145,10 +146,10 @@ class ApiController extends Controller
                 $ip_ad = Request::ip();
 
                 if($episode){
-                    $query_hot2 = hot_animes::where('id_anime', $this->RuleAnime($id))->where('episode_anime', $this->RuleAnime($epi))->where('ip_address', $ip_ad)->latest()->first();
+                    $query_hot2 = hot_animes::where('id_anime', $this->RuleAnime($id))->where('episode_anime', $this->RuleAnime($epi))->where('ip_address', $ip_ad)->where('season_anime', AnimeLabelHelper::instance()->season_anime())->latest()->first();
 
-                    $ammount_anime_q = amount_hot_animes::where('id_anime', $this->RuleAnime($id))->first();
-                    $ammount_episode_q = amount_hot_episodes::where('id_episode', $this->RuleAnime($epi))->first();
+                    $ammount_anime_q = amount_hot_animes::where('id_anime', $this->RuleAnime($id))->where('season_anime', AnimeLabelHelper::instance()->season_anime())->first();
+                    $ammount_episode_q = amount_hot_episodes::where('id_episode', $this->RuleAnime($epi))->where('season_anime', AnimeLabelHelper::instance()->season_anime())->first();
 
                     if($query_hot2) {
                         if(time() - strtotime($query_hot2->created_at) > (60*60*2)) {
@@ -156,6 +157,7 @@ class ApiController extends Controller
                             $hot_view1->id_anime        = $this->RuleAnime($id);
                             $hot_view1->episode_anime   = $this->RuleAnime($epi);
                             $hot_view1->ip_address      = $ip_ad;
+                            $hot_view1->season_anime    = AnimeLabelHelper::instance()->season_anime();
                             $hot_view1->save();
 
                             if($ammount_anime_q) {
@@ -166,6 +168,7 @@ class ApiController extends Controller
                                 $amount_hot_animes                  = new amount_hot_animes;
                                 $amount_hot_animes->id_anime        = $this->RuleAnime($id);
                                 $amount_hot_animes->amount_views    = 1;
+                                $amount_hot_animes->season_anime    = AnimeLabelHelper::instance()->season_anime();
                                 $amount_hot_animes->save();
                             }
                             if($ammount_episode_q) {
@@ -176,6 +179,7 @@ class ApiController extends Controller
                                 $amount_hot_episodes                = new amount_hot_episodes;
                                 $amount_hot_episodes->id_episode    = $this->RuleAnime($epi);
                                 $amount_hot_episodes->amount_views  = 1;
+                                $amount_hot_episodes->season_anime  = AnimeLabelHelper::instance()->season_anime();
                                 $amount_hot_episodes->save();
                             }
                         }
@@ -184,6 +188,7 @@ class ApiController extends Controller
                         $hot_view2->id_anime        = $this->RuleAnime($id);
                         $hot_view2->episode_anime   = $this->RuleAnime($epi);
                         $hot_view2->ip_address      = $ip_ad;
+                        $hot_view2->season_anime    = AnimeLabelHelper::instance()->season_anime();
                         $hot_view2->save();
 
                         if($ammount_anime_q) {
@@ -194,6 +199,7 @@ class ApiController extends Controller
                             $amount_hot_animes                  = new amount_hot_animes;
                             $amount_hot_animes->id_anime        = $this->RuleAnime($id);
                             $amount_hot_animes->amount_views    = 1;
+                            $amount_hot_animes->season_anime    = AnimeLabelHelper::instance()->season_anime();
                             $amount_hot_animes->save();
                         }
                         if($ammount_episode_q) {
@@ -204,6 +210,7 @@ class ApiController extends Controller
                             $amount_hot_episodes                = new amount_hot_episodes;
                             $amount_hot_episodes->id_episode    = $this->RuleAnime($epi);
                             $amount_hot_episodes->amount_views  = 1;
+                            $amount_hot_episodes->season_anime  = AnimeLabelHelper::instance()->season_anime();
                             $amount_hot_episodes->save();
                         }
                     }
