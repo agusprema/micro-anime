@@ -62,7 +62,9 @@
                 <a class="float-left" href="{{ url('/') . '/' . strtolower(str_replace(" ", "-", $episode->episode)) }}">{{ str_replace("-", " ", str_replace(''.$episode->id_anime.'', "", $episode->episode)) }}</a>
 
                 @if ($episode->download)
-                <a class="float-right" href="<?= $episode['download'] ?>">Download</a>
+                <form action="@if ($episode->from_micro == 'Y'){{ 'http://micro.com/'. $episode->download . '/download' }}@else {{ $episode->download }} @endif" method="post" class="float-right">
+                    <a href="javascript:;" onclick="parentNode.submit();">Download</a>
+                </form>
                 @else
                 <span class="float-right">Not Available</span>
                 @endif

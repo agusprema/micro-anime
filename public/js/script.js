@@ -18,6 +18,14 @@ $(document).ready(function(){
             g = $(this).data("anime"),
             j = $(this).data("episode");
         $(".player").replaceWith('<iframe class="hold-player player" data-src="' + r + '" width="' + e + '" height="' + o + '" frameBorder="0" src="' + r + '" frameborder="0" allowfullscreen></iframe>');
+        /* $('#change-server').change(function(event) {
+            var src = $(this).val();
+            if (src) {
+                var height = $('.player').children('img').height() ? $('.player').children('img').height() : $('.player').height();
+                var width = $('.player').children('img').width() ? $('.player').children('img').width() : $('.player').width();
+                $('.player').replaceWith('<iframe class="hold-player player" data-src="' + src + '" width="' + width + '" height="' + height + '" frameBorder="0" src="' + src + '" frameborder="0" allowfullscreen><div class="spinner"></div></iframe>');
+            }
+        }); */
         $.Lazy('iFrame', function(element, response) {
             var imageBase = this.config('imageBase');
         });

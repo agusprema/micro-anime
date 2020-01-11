@@ -11,7 +11,28 @@
     @endforeach
 </div>
 
-<div data-src="{{ $episode->video }}" data-anime="{{ $episode->id_anime }}" data-episode="{{ $episode->episode }}" class="player mb-2" id="player">
+{{-- <div class="action-play pb-1">
+    <div class="dropdown float-right">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDownload" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Download
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownDownload">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+
+    <select class="custom-select float-right mr-1 col-md-3 bg-secondary text-light" id="change-server" style="border-color: #6c757d;">
+        <option selected>Change Server</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+    <div class="clearfix"></div>
+</div> --}}
+
+<div data-src="@if ($episode->from_micro == 'Y'){{ 'http://micro.com/'. $episode->video . '/embed' }}@else {{ $episode->video }} @endif" data-anime="{{ $episode->id_anime }}" data-episode="{{ $episode->episode }}" class="player mb-2" id="player">
     @if ($anime->background_anime)
     <img style="max-height: 450px" class="img-fluid" src="{{ $anime->background_anime }}" alt="{{ $anime->title_anime }}" title="{{ $anime->title_anime }}" />
     @else

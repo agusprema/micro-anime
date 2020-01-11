@@ -166,6 +166,10 @@ class HomeController extends Controller
 
     public function play_anime($request)
     {
+        /* $episode = episode_animes::where('episode', $request)->where('from_micro', 'Y')->first();
+        if(!$episode){
+            $episode = episode_animes::where('episode', $request)->first();
+        } */
         $episode = episode_animes::where('episode', $request)->first();
         $anime = '';
         if ($episode) {
