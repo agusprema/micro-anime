@@ -114,7 +114,7 @@ overflow: hidden;
     @endphp
     <li class="nav-item">
         <a class="nav-link pb-0 @foreach ($menu_group as $m_group)@if (url()->full() == url($m_group->url))collapsed @endif @endforeach" href="#" data-toggle="collapse" data-target="#collapse{{ $group_menu->g_id }}" aria-expanded="false" aria-controls="collapse{{ $group_menu->g_id }}">
-            <i class="fas fa-fw {{ $group_menu->g_icon }}"></i>
+            <i class="fa-fw {{ $group_menu->g_icon }}"></i>
             <span>{{ $group_menu->g_name }}</span>
         </a>
         <div id="collapse{{ $group_menu->g_id }}" class="collapse @foreach ($menu_group as $m_group)@if (url()->full() == url($m_group->url))show @endif @endforeach" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
