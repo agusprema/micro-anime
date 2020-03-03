@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Moderator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\ads_banners;
+use App\ads_videos;
 
-class AdsBannerController extends Controller
+class AdsVideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class AdsBannerController extends Controller
      */
     public function index()
     {
-        $ads = ads_banners::orderBy('type_for')->get();
+        $ads = ads_videos::orderBy('type_for')->get();
 
-        return view('moderator.ads-banner.index')->with('ads', $ads);
+        return view('moderator.ads-video.index')->with('ads', $ads);
     }
 
     /**
@@ -39,22 +39,22 @@ class AdsBannerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'     => 'required',
+            'message'   => 'required',
             'url'       => 'required|active_url',
-            'image'     => 'required',
-            'type_for'  => 'required|in:home,anime,footer,announcements',
+            'video'     => 'required',
+            'type_for'  => 'required|in:preroll,postroll',
             'expired'   => 'required|date'
         ]);
 
-        $ads            = new ads_banners;
-        $ads->title     = $request->title;
+        $ads            = new ads_videos;
+        $ads->message   = $request->message;
         $ads->url       = $request->url;
-        $ads->image     = $request->image;
+        $ads->video     = $request->video;
         $ads->type_for  = $request->type_for;
         $ads->expired   = $request->expired;
         $ads->save();
 
-        return redirect('moderator/ads-banner')->with('success', 'Ads Banner has been add');
+        return redirect('moderator/ads-video')->with('success', 'Ads Video has been add');
     }
 
     /**
@@ -76,9 +76,9 @@ class AdsBannerController extends Controller
      */
     public function edit($id)
     {
-        $ads = ads_banners::find($id);
+        $ads = ads_videos::find($id);
 
-        return view('moderator.ads-banner.edit')->with('ads', $ads);
+        return view('moderator.ads-video.edit')->with('ads', $ads);
     }
 
     /**
@@ -91,22 +91,22 @@ class AdsBannerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'     => 'required',
+            'message'   => 'required',
             'url'       => 'required|active_url',
-            'image'     => 'required',
-            'type_for'  => 'required|in:home,anime,footer,announcements',
+            'video'     => 'required',
+            'type_for'  => 'required|in:preroll,postroll',
             'expired'   => 'required|date'
         ]);
 
-        $ads            = ads_banners::find($id);
-        $ads->title     = $request->title;
+        $ads            = ads_videos::find($id);
+        $ads->message   = $request->message;
         $ads->url       = $request->url;
-        $ads->image     = $request->image;
+        $ads->video     = $request->video;
         $ads->type_for  = $request->type_for;
         $ads->expired   = $request->expired;
         $ads->save();
 
-        return redirect('moderator/ads-banner')->with('success', 'Ads Banner has been change');
+        return redirect('moderator/ads-video')->with('success', 'Ads Video has been change');
     }
 
     /**
@@ -117,8 +117,8 @@ class AdsBannerController extends Controller
      */
     public function destroy($id)
     {
-        ads_banners::destroy($id);
+        ads_videos::destroy($id);
 
-        return redirect('moderator/ads-banner')->with('warning', 'Ads Banner has been deleted.');
+        return redirect('moderator/ads-Video')->with('warning', 'Ads Video has been deleted.');
     }
 }

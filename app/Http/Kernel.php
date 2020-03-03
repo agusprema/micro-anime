@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.admin' => \App\Http\Middleware\AccessAdmin::class,
         'auth.moderator' => \App\Http\Middleware\AccessModerator::class,
+        'api.get'   => \App\Http\Middleware\Cors::class,
     ];
 
     /**

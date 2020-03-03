@@ -1,23 +1,23 @@
 @extends('layouts.user')
 
-@section('title', 'Ads Banner Management')
+@section('title', 'Ads Video Management')
 
 @section('content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Ads Banner Management</h1>
+<h1 class="h3 mb-4 text-gray-800">Ads Video Management</h1>
 
 <div class="row">
     <div class="col-lg">
 
-        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Ads Banner</a>
+        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Ads Video</a>
         @include('partials.alerts')
         <table class="table table-hover" id="table1">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Message</th>
                     <th scope="col">Url</th>
-                    <th scope="col">Image</th>
+                    <th scope="col">Video</th>
                     <th scope="col">Type</th>
                     <th scope="col">Date Expired</th>
                     <th scope="col">Action</th>
@@ -27,14 +27,14 @@
                 @foreach ($ads as $ads)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $ads->title }}</td>
+                    <td>{{ $ads->message }}</td>
                     <td>{{ $ads->url }}</td>
-                    <td>{{ $ads->image }}</td>
+                    <td>{{ $ads->video }}</td>
                     <td>{{ $ads->type_for }}</td>
                     <td>{{ $ads->expired }}</td>
                     <td>
-                        <a class="btn btn-success float-left mr-1" href="{{ url('moderator/ads-banner',$ads->id) }}/edit"><i class="far fa-edit mr-1"></i>Edit</a>
-                        <form action="{{ url('moderator/ads-banner',$ads->id) }}" method="POST" id="tmbl-delete-{{ $ads->id }}" class="float-left mr-1">
+                        <a class="btn btn-success float-left mr-1" href="{{ url('moderator/ads-video',$ads->id) }}/edit"><i class="far fa-edit mr-1"></i>Edit</a>
+                        <form action="{{ url('moderator/ads-video',$ads->id) }}" method="POST" id="tmbl-delete-{{ $ads->id }}" class="float-left mr-1">
                             @csrf
                             {{ method_field('DELETE') }}
                             <button type="button" class="btn btn-danger tmbl-delete" value="{{ $ads->id }}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
@@ -55,19 +55,19 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="newMenuModalLabel">Add New Ads Banner</h5>
+                <h5 class="modal-title" id="newMenuModalLabel">Add New Ads Video</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form action="{{ url('moderator/ads-banner') }}" method="post">
+            <form action="{{ url('moderator/ads-video') }}" method="post">
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Title Ads" value="{{ old('title') }}">
+                        <input type="text" class="form-control" id="message" name="message" placeholder="Message Ads" value="{{ old('message') }}">
 
-                        @error('title')
+                        @error('message')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -81,9 +81,9 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="image" name="image" placeholder="Image Ads" value="{{ old('image') }}">
+                        <input type="text" class="form-control" id="video" name="video" placeholder="video Ads" value="{{ old('video') }}">
 
-                        @error('image')
+                        @error('video')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -91,10 +91,8 @@
                     <div class="form-group">
                         <select name="type_for" id="type_for" class="custom-select">
                             <option value="">Select Type Ads</option>
-                            <option value="home" @if (old('type_for') == 'home')selected @endif>Home</option>
-                            <option value="anime" @if (old('type_for') == 'anime')selected @endif>Anime</option>
-                            <option value="footer" @if (old('type_for') == 'footer')selected @endif>Footer</option>
-                            <option value="announcements" @if (old('type_for') == 'announcements')selected @endif>Announcements</option>
+                            <option value="preroll" @if (old('type_for') == 'preroll')selected @endif>Preroll</option>
+                            <option value="postroll" @if (old('type_for') == 'postroll')selected @endif>Postroll</option>
                         </select>
 
                         @error('type_for')

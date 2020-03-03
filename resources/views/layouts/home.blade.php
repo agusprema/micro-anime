@@ -113,7 +113,7 @@
                 <!-- Ads Banner -->
                 <div class="col-md-12 p-0 pb-2 mt-2">
                     <div class="mb-2">
-                        @foreach (\DB::table('ads_banners')->where('type_for', 'home')->orderBy('id', 'desc')->limit(4)->get() as $ads_home)
+                        @foreach (\DB::table('ads_banners')->where('type_for', 'home')->where('expired', '>', date("Y-m-d"))->orderBy('id', 'desc')->limit(4)->get() as $ads_home)
                         <a class="" target="_blank" href="{{ $ads_home->url }}" title="{{ $ads_home->title }}"><img class="ads_banner" src="{{ $ads_home->image }}" alt="{{ $ads_home->title }}" title="{{ $ads_home->title }}"></a>
                         @endforeach
                         <div class="clearfix"></div>
@@ -173,7 +173,7 @@
 
                     <!-- Ads Banner -->
                     <div class="col-md-12 p-0 mb-2">
-                        @foreach (\DB::table('ads_banners')->where('type_for', 'announcements')->orderBy('id', 'desc')->limit(1)->get() as $ads_home)
+                        @foreach (\DB::table('ads_banners')->where('type_for', 'announcements')->where('expired', '>', date("Y-m-d"))->orderBy('id', 'desc')->limit(1)->get() as $ads_home)
                         <a class="" target="_blank" href="{{ $ads_home->url }}" title="{{ $ads_home->title }}"><img class="w-100" src="{{ $ads_home->image }}" alt="{{ $ads_home->title }}" title="{{ $ads_home->title }}"></a>
                         @endforeach
                     </div>
@@ -348,7 +348,7 @@
 
         <!-- Ads Banner -->
         <div class="container">
-            @foreach (\DB::table('ads_banners')->where('type_for', 'footer')->orderBy('id', 'desc')->limit(1)->get() as $ads_footer)
+            @foreach (\DB::table('ads_banners')->where('type_for', 'footer')->where('expired', '>', date("Y-m-d"))->orderBy('id', 'desc')->limit(1)->get() as $ads_footer)
             <div id="floatbanner" class="fixed-bottom" style="text-align: center;">
                 <div>
                     <a id="close-floatbanner" onclick="document.getElementById('floatbanner').style.display = 'none';" style="cursor:pointer; position: absolute;z-index: 10;"><img style="width: 30px;" alt="close" src="{{ asset('img/btn-close.png') }}" title="close button"></a>

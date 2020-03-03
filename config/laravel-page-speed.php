@@ -11,7 +11,8 @@ return [
     | You would probably replace that in your local configuration to get a readable output.
     |
     */
-    'enable' => env('LARAVEL_PAGE_SPEED_ENABLE', true),
+    /* env('LARAVEL_PAGE_SPEED_ENABLE', true) */
+    'enable' => false,
 
     /*
     |--------------------------------------------------------------------------

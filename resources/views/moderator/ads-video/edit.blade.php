@@ -1,26 +1,26 @@
 @extends('layouts.user')
 
-@section('title', 'Edit Ads Banner Management')
+@section('title', 'Edit Ads Video Management')
 
 @section('content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Edit Ads Banner Management</h1>
+<h1 class="h3 mb-4 text-gray-800">Edit Ads Video Management</h1>
 
 <div class="row">
     <div class="col-lg">
 
         @include('partials.alerts')
 
-        <form action="{{ url('/moderator/ads-banner', $ads->id) }}" method="post">
+        <form action="{{ url('/moderator/ads-video', $ads->id) }}" method="post">
             @csrf
             <input type="hidden" class="form-control" id="id" name="id" value="{{ $ads->id }}">
             {{ method_field('PUT') }}
 
             <div class="form-group row">
-                <label for="title" class="col-sm-2 col-form-label">Title Ads</label>
+                <label for="message" class="col-sm-2 col-form-label">Message Ads</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" name="title" value="{{ $ads->title ?? old('title') }}">
-                    @error('title')
+                    <input type="text" class="form-control" id="message" name="message" value="{{ $ads->message ?? old('message') }}">
+                    @error('message')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -37,10 +37,10 @@
             </div>
 
             <div class="form-group row">
-                <label for="image" class="col-sm-2 col-form-label">Image Ads</label>
+                <label for="video" class="col-sm-2 col-form-label">Video Ads</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="image" name="image" value="{{ $ads->image ?? old('image') }}">
-                    @error('image')
+                    <input type="text" class="form-control" id="video" name="video" value="{{ $ads->video ?? old('video') }}">
+                    @error('video')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -51,10 +51,8 @@
                 <div class="col-sm-10">
                     <select name="type_for" id="type_for" class="custom-select">
                         <option value="">Select Type Ads</option>
-                        <option value="home" @if (old('type_for') == 'home' OR $ads->type_for == 'home')selected @endif>Home</option>
-                        <option value="anime" @if (old('type_for') == 'anime' OR $ads->type_for == 'anime')selected @endif>Anime</option>
-                        <option value="footer" @if (old('type_for') == 'footer' OR $ads->type_for == 'footer')selected @endif>Footer</option>
-                        <option value="announcements" @if (old('type_for') == 'announcements' OR $ads->type_for == 'announcements')selected @endif>Announcements</option>
+                        <option value="preroll" @if (old('type_for') == 'preroll' OR $ads->type_for == 'preroll')selected @endif>Preroll</option>
+                        <option value="postroll" @if (old('type_for') == 'postroll' OR $ads->type_for == 'postroll')selected @endif>Postroll</option>
                     </select>
                     @error('type_for')
                     <small class="text-danger">{{ $message }}</small>

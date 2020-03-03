@@ -55,6 +55,7 @@ Route::namespace('Moderator')->prefix('moderator')->middleware(['auth', 'verifie
     Route::resource('/group-menu', 'GroupMenuController', ['except' => ['create', 'show']]);
     Route::resource('/users', 'UsersController', ['except' => ['create', 'show']]);
     Route::resource('/ads-banner', 'AdsBannerController', ['except' => ['create', 'show']]);
+    Route::resource('/ads-video', 'AdsVideoController', ['except' => ['create', 'show']]);
 
     Route::get('/roleaccess/{id}', 'RoleAccesscontroller@index');
     Route::post('/changeaccess', 'RoleAccesscontroller@store');
@@ -67,6 +68,7 @@ Route::namespace('Api')->prefix('api')->name('api.')->group(function () {
     Route::get('/hot-views/{id}/{eps}', 'ApiController@hot_views');
     Route::get('/history-user/{eps}', 'ApiController@history_anime');
     Route::get('/visitor', 'ApiController@visitor_counter')->middleware(['auth', 'verified', 'auth.moderator']);
+    /* Route::get('/ads-video', 'ApiController@video_ads'); */
 });
 
 Route::get('/{episode}', 'Home\HomeController@play_anime');

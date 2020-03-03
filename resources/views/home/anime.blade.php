@@ -4,7 +4,7 @@
 <!-- post -->
 @if ($anime)
 <div class="ads_anime pt-2">
-    @foreach (\DB::table('ads_banners')->where('type_for', 'anime')->orderBy('id', 'desc')->limit(1)->get() as $ads_anime)
+    @foreach (\DB::table('ads_banners')->where('type_for', 'anime')->where('expired', '>', date("Y-m-d"))->orderBy('id', 'desc')->limit(1)->get() as $ads_anime)
     <a target="_blank" href="{{ $ads_anime->url }}" title="{{ $ads_anime->title }}">
         <img style="max-height:90px;" class="w-100" src="{{ $ads_anime->image }}" alt="{{ $ads_anime->title }}" title="{{ $ads_anime->title }}">
     </a>
