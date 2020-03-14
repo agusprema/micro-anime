@@ -10,7 +10,7 @@
 <meta name='robots' content='noindex,noarchive' />
 <meta name='referrer' content='strict-origin-when-cross-origin' />
 
-<title>@yield('title') - Micro Anime</title>
+<title>@yield('title') - {{ config('app.name') }}</title>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -224,7 +224,7 @@ overflow: hidden;
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Micro Anime 2019 - {{ date('Y') }}</span>
+                    <span>Copyright &copy; {{ config('app.name') }} 2019 - {{ date('Y') }}</span>
                     </div>
                 </div>
             </footer>

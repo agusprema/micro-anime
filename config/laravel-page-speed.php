@@ -12,7 +12,7 @@ return [
     |
     */
     /* env('LARAVEL_PAGE_SPEED_ENABLE', true) */
-    'enable' => false,
+    'enable' => env('LARAVEL_PAGE_SPEED_ENABLE', true),
 
     /*
     |--------------------------------------------------------------------------

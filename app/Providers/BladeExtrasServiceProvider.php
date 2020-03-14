@@ -35,5 +35,14 @@ class BladeExtrasServiceProvider extends ServiceProvider
 
             return false;
         });
+
+        Blade::if('ControlPanel', function ($expression) {
+
+            if('true' == $expression) {
+                return true;
+            }
+
+            return false;
+        });
     }
 }

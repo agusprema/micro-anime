@@ -146,6 +146,7 @@ $(document).ready(function(){
         })
     }
 
+    /* lazy load */
     $('.box-post img,.box-tamat img,.col-md-2-a img,.img-hot-sidebar img').lazy({
         effect: "fadeIn",
         effectTime: 1500,

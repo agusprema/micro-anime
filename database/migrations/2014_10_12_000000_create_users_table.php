@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('gender', 10);
             $table->date('date_of_birth');
+            $table->string('profile_image');
+            $table->string('thumbnail_image');
             $table->timestamps();
         });
     }

@@ -8,18 +8,18 @@
         <link rel="alternate" hreflang="id" href="{{ url()->full() }}" />
         <meta name="robots" content="noodp"/>
 
-        <title>@yield('title')Micro Anime | Nonton Anime Subtitle Indonesia</title>
+        <title>@yield('title'){{ config('app.name') }} | Nonton Anime Subtitle Indonesia</title>
         <meta name="description" content="Nonton streaming anime subtitle indonesia, download anime sub indo samehadaku"/>
 
         <meta property="og:locale" content="id_ID" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="@yield('title')Micro Anime | Nonton Anime Subtitle Indonesia" />
+        <meta property="og:title" content="@yield('title'){{ config('app.name') }} | Nonton Anime Subtitle Indonesia" />
         <meta property="og:description" content="Nonton streaming anime subtitle indonesia, download anime sub indo samehadaku" />
         <meta property="og:url" content="{{ url()->full() }}" />
-        <meta property="og:site_name" content="Micro Anime" />
+        <meta property="og:site_name" content="{{ config('app.name') }}" />
 
         <meta property="twitter:card" content="summary" />
-        <meta property="twitter:title" content="@yield('title')Micro Anime | Nonton Anime Subtitle Indonesia" />
+        <meta property="twitter:title" content="@yield('title'){{ config('app.name') }} | Nonton Anime Subtitle Indonesia" />
         <meta property="twitter:description" content="Nonton streaming anime subtitle indonesia, download anime sub indo samehadaku" />
 
         <!-- Bootstrap CSS -->
@@ -338,7 +338,7 @@
 
                     <!-- Copyright -->
                     <div class="footer-copyright text-center py-2">© 2019 - <?= date("Y");?> Copyright:
-                        <a href="{{ url('/') }}">Micro Anime</a>
+                        <a href="{{ url('/') }}">{{ config('app.name') }}</a>
                     </div>
                     <!-- Copyright -->
                 </div>

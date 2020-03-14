@@ -84,7 +84,7 @@ class RegisterController extends Controller
 
         $user->roles()->attach($role);
 
-        $list_anime = list_user_animes::create(['id_user' => $id_user,'id_animes' => '']);
+        $list_anime = list_user_animes::create(['id_user' => $id_user,'id_anime' => '']);
 
         return $user;
     }
