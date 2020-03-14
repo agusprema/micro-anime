@@ -8,7 +8,11 @@
     @foreach ($tamats as $tamat)
     <div class="col-md-2-a p-1 box-post float-left">
         <a href="{{ url('/anime') . '/' . $tamat->id_anime }}" title="{{ $tamat->title_anime }}">
+            @ControlPanel('lazy load')
             <img data-src="{{ $tamat->image_anime }}" title="{{ $tamat->title_anime }}">
+            @else
+            <img src="{{ $tamat->image_anime }}" title="{{ $tamat->title_anime }}">
+            @endControlPanel
             <div class="title-post">{{ $tamat->title_anime }}</div>
         </a>
 
@@ -27,5 +31,5 @@
     @include('partials.errors_anime')
 @endif
 <div class="clearfix"></div>
-{{ $tamats->links() }}
+{{ $tamats->links('vendor.pagination.pagination') }}
 @endsection

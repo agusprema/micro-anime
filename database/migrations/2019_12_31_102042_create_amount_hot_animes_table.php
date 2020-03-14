@@ -17,6 +17,7 @@ class CreateAmountHotAnimesTable extends Migration
             $table->bigIncrements('id');
             $table->string('id_anime');
             $table->integer('amount_views');
+            $table->string('season_anime', 60);
             $table->timestamps();
         });
     }

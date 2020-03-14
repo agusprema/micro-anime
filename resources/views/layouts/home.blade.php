@@ -185,7 +185,11 @@
                         @foreach (\DB::table('detail_animes')->where('status_anime', 'Tamat')->orderBy('id', 'desc')->limit(6)->get() as $tamat_box)
                         <div class="col-md-2 box-tamat p-1 float-left">
                             <a href="{{ url('/anime') . '/' . $tamat_box->id_anime }}" title="{{ $tamat_box->title_anime }}">
+                                @ControlPanel('lazy load')
                                 <img data-src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
+                                @else
+                                <img src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
+                                @endControlPanel
                                 <div class="title-tamat">{{ $tamat_box->title_anime }}</div>
                             </a>
                             @if ($tamat_box->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -232,13 +236,15 @@
                         <div class="fb-page" data-href="https://www.facebook.com/microanime/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"></div>
                     </div>
 
-                    <div class="box-chat-sidebar pt-1">
-                            <div class="title-widget hidden-chat"><i class="fas fa-comment-dots text-primary pr-1"></i><span>Chat Room</span></div>
+                    @ControlPanel('chat box')
+                        <div class="box-chat-sidebar pt-1">
+                                <div class="title-widget hidden-chat"><i class="fas fa-comment-dots text-primary pr-1"></i><span>Chat Room</span></div>
 
-                            <div class="content-chat-sidebar pt-1">
-                                <script id="cid0020000226698917551" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 340px;">{"handle":"microanime","arch":"js","styles":{"a":"C8C8C8","b":100,"c":"000000","d":"000000","k":"C8C8C8","l":"C8C8C8","m":"C8C8C8","p":"10","q":"C8C8C8","r":100,"usricon":1.11,"cnrs":"0.36","fwtickm":1}}</script>
-                            </div>
-                    </div>
+                                <div class="content-chat-sidebar pt-1">
+                                    <script id="cid0020000226698917551" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 340px;">{"handle":"microanime","arch":"js","styles":{"a":"C8C8C8","b":100,"c":"000000","d":"000000","k":"C8C8C8","l":"C8C8C8","m":"C8C8C8","p":"10","q":"C8C8C8","r":100,"usricon":1.11,"cnrs":"0.36","fwtickm":1}}</script>
+                                </div>
+                        </div>
+                    @endControlPanel
 
                     <div class="ads-sidebar pt-1">
                         <a href="" target="_blank">
@@ -274,7 +280,13 @@
                                 @foreach (\DB::table('detail_animes')->join('amount_hot_animes', 'detail_animes.id_anime', '=', 'amount_hot_animes.id_anime')->orderBy('amount_hot_animes.amount_views', 'DESC')->where('amount_hot_animes.season_anime', App\Helpers\AnimeLabelHelper::instance()->season_anime())->limit(5)->get() as $hot_sidebar)
                                     <div class="hot-sidebar">
                                         <div class="col-md-3 img-hot-sidebar p-0 pt-1 pb-1 pr-1 float-left">
-                                            <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}"><img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}"></a>
+                                            <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}">
+                                                @ControlPanel('lazy load')
+                                                <img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}">
+                                                @else
+                                                <img style="min-height: 84px; height:100%;" src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}">
+                                                @endControlPanel
+                                            </a>
                                             {!! App\Helpers\AnimeLabelHelper::instance()->label_new($hot_sidebar->id_anime, 1) !!}
                                         </div>
 

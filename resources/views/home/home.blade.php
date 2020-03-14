@@ -8,7 +8,11 @@
     @foreach ($animes as $anime)
     <div class="col-md-2-a p-1 box-post float-left">
         <a href="{{ url('/anime') . '/' . $anime->id_anime }}" title="{{ $anime->title_anime }}">
+            @ControlPanel('lazy load')
             <img data-src="{{ $anime->image_anime }}" title="{{ $anime->title_anime }}">
+            @else
+            <img src="{{ $anime->image_anime }}" title="{{ $anime->title_anime }}">
+            @endControlPanel
             <div class="title-post">{{ $anime->title_anime }}</div>
         </a>
 
@@ -27,5 +31,5 @@
     @include('partials.errors_anime')
 @endif
 <div class="clearfix"></div>
-{{ $animes->links() }}
+{{ $animes->links('vendor.pagination.pagination') }}
 @endsection

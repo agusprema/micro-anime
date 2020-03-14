@@ -21,6 +21,7 @@ class CreateEpisodeAnimesTable extends Migration
             $table->string('download');
             $table->string('next');
             $table->string('prev');
+            $table->string('from_micro',1);
             $table->string('author');
             $table->timestamps();
         });

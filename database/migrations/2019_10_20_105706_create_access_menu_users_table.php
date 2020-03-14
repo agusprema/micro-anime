@@ -15,8 +15,8 @@ class CreateAccessMenuUsersTable extends Migration
     {
         Schema::create('access_menu_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('role_id', 11);
-            $table->integer('menu_id', 11);
+            $table->integer('role_id');
+            $table->integer('menu_id');
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@ Route::namespace('User')->prefix('user')->middleware(['auth', 'verified'])->name
 
     Route::get('/edit-profile', 'EditProfileController@index');
     Route::post('/edit-profile', 'EditProfileController@update');
-    Route::resource('/bookmark-anime', 'BookmarkController', ['except' => ['create', 'show' , 'edit', 'store', 'update', 'destroy']]);
+    Route::get('/bookmark-anime', 'BookmarkController@index');
 });
 
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified', 'auth.admin'])->name('admin.')->group(function () {

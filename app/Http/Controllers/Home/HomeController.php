@@ -139,8 +139,9 @@ class HomeController extends Controller
     public function genre($request)
     {
         $genres = detail_animes::where('genre_anime', 'like', '%' . $request . '%')->paginate(20);
+        $name_genre = $request;
 
-        return view('home.genre')->with('genres', $genres)->with('title_web', $request);
+        return view('home.genre')->with('genres', $genres)->with('name_genre', $name_genre)->with('title_web', $request);
     }
 
     public function anime($request)

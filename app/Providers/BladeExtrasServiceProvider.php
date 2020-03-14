@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\control_panel;
 
 class BladeExtrasServiceProvider extends ServiceProvider
 {
@@ -36,9 +37,9 @@ class BladeExtrasServiceProvider extends ServiceProvider
             return false;
         });
 
-        Blade::if('ControlPanel', function ($expression) {
-
-            if('true' == $expression) {
+        Blade::if('ControlPanel', function ($name_controller) {
+            $panel = control_panel::where('name_controll', $name_controller)->first();
+            if($panel->status === 'true') {
                 return true;
             }
 

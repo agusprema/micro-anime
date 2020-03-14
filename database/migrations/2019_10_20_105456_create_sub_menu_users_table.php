@@ -15,12 +15,12 @@ class CreateSubMenuUsersTable extends Migration
     {
         Schema::create('sub_menu_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('menu_id', 11);
-            $table->integer('group_id', 11);
+            $table->integer('menu_id');
+            $table->integer('group_id');
             $table->string('title');
             $table->string('url');
             $table->string('icon');
-            $table->integer('is_active', 1);
+            $table->integer('is_active');
             $table->timestamps();
         });
     }

@@ -20,7 +20,6 @@ class CreateDetailAnimesTable extends Migration
             $table->string('alternative_title');
             $table->text('summary_anime');
             $table->string('rating_anime', 10);
-            $table->string('vote_anime', 10);
             $table->string('status_anime', 50);
             $table->string('type_anime', 50);
             $table->string('total_anime', 50);

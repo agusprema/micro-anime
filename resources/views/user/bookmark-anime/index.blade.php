@@ -242,5 +242,5 @@
 </div>
 @endforeach
 <div class="clearfix"></div>
-{{ $bookmarks->links() }}
+{{ $bookmarks->links('vendor.pagination.pagination') }}
 @endsection

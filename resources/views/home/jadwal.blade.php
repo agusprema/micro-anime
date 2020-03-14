@@ -12,7 +12,11 @@
             @foreach ($senins as $senin)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $senin->id_anime }}" title="{{ $senin->title_anime }}">
-                    <img data-src="{{ $senin->image_anime }}" alt="{{ $senin->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $senin->image_anime }}" title="{{ $senin->title_anime }}">
+                    @else
+                    <img src="{{ $senin->image_anime }}" title="{{ $senin->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $senin->title_anime }}</div>
                 </a>
                 @if ($senin->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -41,7 +45,11 @@
             @foreach ($selasas as $selasa)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $selasa->id_anime }}" title="{{ $selasa->title_anime }}">
-                    <img data-src="{{ $selasa->image_anime }}" alt="{{ $selasa->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $selasa->image_anime }}" title="{{ $selasa->title_anime }}">
+                    @else
+                    <img src="{{ $selasa->image_anime }}" title="{{ $selasa->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $selasa->title_anime }}</div>
                 </a>
                 @if ($selasa->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -70,7 +78,11 @@
             @foreach ($rabus as $rabu)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $rabu->id_anime }}" title="{{ $rabu->title_anime }}">
-                    <img data-src="{{ $rabu->image_anime }}" alt="{{ $rabu->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $rabu->image_anime }}" title="{{ $rabu->title_anime }}">
+                    @else
+                    <img src="{{ $rabu->image_anime }}" title="{{ $rabu->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $rabu->title_anime }}</div>
                 </a>
                 @if ($rabu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -99,7 +111,11 @@
             @foreach ($kamiss as $kamis)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $kamis->id_anime }}" title="{{ $kamis->title_anime }}">
-                    <img data-src="{{ $kamis->image_anime }}" alt="{{ $kamis->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $kamis->image_anime }}" title="{{ $kamis->title_anime }}">
+                    @else
+                    <img src="{{ $kamis->image_anime }}" title="{{ $kamis->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $kamis->title_anime }}</div>
                 </a>
                 @if ($kamis->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -128,7 +144,11 @@
             @foreach ($jumats as $jumat)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $jumat->id_anime }}" title="{{ $jumat->title_anime }}">
-                    <img data-src="{{ $jumat->image_anime }}" alt="{{ $jumat->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $jumat->image_anime }}" title="{{ $jumat->title_anime }}">
+                    @else
+                    <img src="{{ $jumat->image_anime }}" title="{{ $jumat->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $jumat->title_anime }}</div>
                 </a>
                 @if ($jumat->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -157,7 +177,11 @@
             @foreach ($sabtus as $sabtu)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $sabtu->id_anime }}" title="{{ $sabtu->title_anime }}">
-                    <img data-src="{{ $sabtu->image_anime }}" alt="{{ $sabtu->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $sabtu->image_anime }}" title="{{ $sabtu->title_anime }}">
+                    @else
+                    <img src="{{ $sabtu->image_anime }}" title="{{ $sabtu->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $sabtu->title_anime }}</div>
                 </a>
                 @if ($sabtu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -186,7 +210,11 @@
             @foreach ($minggus as $minggu)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $minggu->id_anime }}" title="{{ $minggu->title_anime }}">
-                    <img data-src="{{ $minggu->image_anime }}" alt="{{ $minggu->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $minggu->image_anime }}" title="{{ $minggu->title_anime }}">
+                    @else
+                    <img src="{{ $minggu->image_anime }}" title="{{ $minggu->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $minggu->title_anime }}</div>
                 </a>
                 @if ($minggu->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -215,7 +243,11 @@
             @foreach ($randoms as $random)
             <div class="col-md-2-a p-1 float-left">
                 <a href="{{ url('/anime') . '/' . $random->id_anime }}" title="{{ $random->title_anime }}">
-                    <img data-src="{{ $random->image_anime }}" alt="{{ $random->title_anime }}">
+                    @ControlPanel('lazy load')
+                    <img data-src="{{ $random->image_anime }}" title="{{ $random->title_anime }}">
+                    @else
+                    <img src="{{ $random->image_anime }}" title="{{ $random->title_anime }}">
+                    @endControlPanel
                     <div class="title-calendar">{{ $random->title_anime }}</div>
                 </a>
                 @if ($random->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif

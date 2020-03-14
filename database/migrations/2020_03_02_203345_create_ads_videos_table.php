@@ -15,7 +15,7 @@ class CreateAdsVideosTable extends Migration
     {
         Schema::create('ads_videos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Massage');
+            $table->string('message');
             $table->string('url');
             $table->string('video');
             $table->string('type_for');

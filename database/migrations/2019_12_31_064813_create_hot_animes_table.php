@@ -16,7 +16,9 @@ class CreateHotAnimesTable extends Migration
         Schema::create('hot_animes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('id_anime')->nullable();
-            $table->integer('hot_views')->default(0);
+            $table->string('episode_anime');
+            $table->string('season_anime', 60);
+            $table->string('ip_address', 100);
             $table->timestamps();
         });
     }

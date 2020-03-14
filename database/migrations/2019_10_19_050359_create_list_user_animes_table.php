@@ -16,7 +16,7 @@ class CreateListUserAnimesTable extends Migration
         Schema::create('list_user_animes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('id_user', 10);
-            $table->longText('id_animes');
+            $table->string('id_anime');
             $table->timestamps();
         });
     }
