@@ -6,6 +6,7 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Edit Episode Anime Management</h1>
 
+<a href="{{ url('admin/episode-anime', $episode->id_anime) }}" class="btn btn-primary mb-3">Back To Anime {{ App\detail_animes::where('id_anime', $episode->id_anime)->first()->title_anime }}</a>
 <div class="row">
     <div class="col-lg">
 

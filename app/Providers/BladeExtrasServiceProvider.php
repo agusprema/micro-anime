@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\control_panel;
+use Akaunting\Setting\Facade as Setting;
 
 class BladeExtrasServiceProvider extends ServiceProvider
 {
@@ -37,9 +38,22 @@ class BladeExtrasServiceProvider extends ServiceProvider
             return false;
         });
 
-        Blade::if('ControlPanel', function ($name_controller) {
-            $panel = control_panel::where('name_controll', $name_controller)->first();
+        Blade::if('hasroles', function ($expression) {
+            if (Auth::user()) {
+                if (Auth::user()->hasAnyRoles($expression)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        Blade::if('Settings', function ($name_controller, $status) {
+            /* $panel = control_panel::where('name_controll', $name_controller)->first();
             if($panel->status === 'true') {
+                return true;
+            } */
+            if(Setting::get($name_controller) === $status) {
                 return true;
             }
 

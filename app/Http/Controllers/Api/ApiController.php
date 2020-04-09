@@ -31,13 +31,13 @@ class ApiController extends Controller
         }
     }
 
-    public function RuleAnime($value)
+/*     public function RuleAnime($value)
     {
         $anime_hash = strtolower(str_replace(" ", "-", str_replace("`", "", str_replace("~", "", str_replace(" -", "", str_replace("'", "", preg_replace('~[\\\\/:*?!@#$%^&()"<>,|.]~', '', $value)))))));
         return $anime_hash;
-    }
+    } */
 
-    public function add_list($id)
+/*     public function add_list($id)
     {
         if (!Auth::check()) {
             return response()->json([
@@ -80,9 +80,9 @@ class ApiController extends Controller
                 }
             }
         }
-    }
+    } */
 
-    public function remove_list($id)
+/*     public function remove_list($id)
     {
         if (!Auth::check()) {
             return response()->json([
@@ -123,18 +123,18 @@ class ApiController extends Controller
                 }
             }
         }
-    }
+    } */
 
-    public function visitor_counter()
+    /* public function visitor_counter()
     {
         $user = Analytics::getAnalyticsService()->data_realtime->get('ga:205569282', 'rt:activeUsers')->totalsForAllResults['rt:activeUsers'];
-        /* $user = Analytics::fetchTotalVisitorsAndPageViews(Period::create(Carbon::now(), Carbon::now())); */
+        // $user = Analytics::fetchTotalVisitorsAndPageViews(Period::create(Carbon::now(), Carbon::now())); //
         $data[]['visitors'] = $user;
         return json_encode($data);
-        /* return $user->toJson(); */
-    }
+        // return $user->toJson(); //
+    } */
 
-    public function hot_views($id, $epi)
+    /* public function hot_views($id, $epi)
     {
         $id     = $this->RuleAnime($id);
         $epi    = $this->RuleAnime($epi);
@@ -232,34 +232,37 @@ class ApiController extends Controller
                 'error' => 'The id animes or episode anime field is required.'
             ]);
         }
-    }
+    } */
 
-    public function history_anime($id)
+    /* public function history_anime($id)
     {
-        $id                 = $this->RuleAnime($id);
-        $user               = Auth::user()->id_user;
-        $episode            = episode_animes::where('episode', $id)->first();
-        $history_user       = History_Users::where('id_user', $user)->orderBy('id', 'ASC')->limit(1)->get();
-        $history_user_count = History_Users::where('id_user', $user)->get()->count();
-        $c_hs               = History_Users::where('id_user', $user)->where('id_episode', $id)->first();
+        if (Auth::user()->hasVerifiedEmail()) {
 
-        if (Auth::check() && $episode) {
-            if($c_hs){
-                History_Users::destroy($c_hs->id);
+            $id                 = $this->RuleAnime($id);
+            $user               = Auth::user()->id_user;
+            $episode            = episode_animes::where('episode', $id)->first();
+            $history_user       = History_Users::where('id_user', $user)->orderBy('id', 'ASC')->limit(1)->get();
+            $history_user_count = History_Users::where('id_user', $user)->get()->count();
+            $c_hs               = History_Users::where('id_user', $user)->where('id_episode', $id)->first();
 
-                $history_user_q             = new History_Users;
-                $history_user_q->id_user    = $user;
-                $history_user_q->id_episode = $id;
-                $history_user_q->save();
-            } else {
-                if($history_user_count > 9){
-                    History_Users::destroy($history_user->id);
+            if (Auth::check() && $episode) {
+                if($c_hs){
+                    History_Users::destroy($c_hs->id);
+
+                    $history_user_q             = new History_Users;
+                    $history_user_q->id_user    = $user;
+                    $history_user_q->id_episode = $id;
+                    $history_user_q->save();
+                } else {
+                    if($history_user_count > 9){
+                        History_Users::destroy($history_user->id);
+                    }
+                    $history_user_q             = new History_Users;
+                    $history_user_q->id_user    = $user;
+                    $history_user_q->id_episode = $id;
+                    $history_user_q->save();
                 }
-                $history_user_q             = new History_Users;
-                $history_user_q->id_user    = $user;
-                $history_user_q->id_episode = $id;
-                $history_user_q->save();
             }
         }
-    }
+    } */
 }

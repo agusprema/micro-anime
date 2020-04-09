@@ -8,11 +8,11 @@
     @foreach ($tamats as $tamat)
     <div class="col-md-2-a p-1 box-post float-left">
         <a href="{{ url('/anime') . '/' . $tamat->id_anime }}" title="{{ $tamat->title_anime }}">
-            @ControlPanel('lazy load')
+            @Settings('bassic_settings.lazy_load.status', 'true')
             <img data-src="{{ $tamat->image_anime }}" title="{{ $tamat->title_anime }}">
             @else
             <img src="{{ $tamat->image_anime }}" title="{{ $tamat->title_anime }}">
-            @endControlPanel
+            @endSettings
             <div class="title-post">{{ $tamat->title_anime }}</div>
         </a>
 

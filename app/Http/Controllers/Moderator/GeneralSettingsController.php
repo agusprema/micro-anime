@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Moderator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Akaunting\Setting\Facade as Setting;
 
-class ControlPanel extends Controller
+class GeneralSettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class ControlPanel extends Controller
      */
     public function index()
     {
-        //
+        $bassic_settings = Setting::get('bassic_settings');
+        $user_settings = Setting::get('user_settings');
+        return view('moderator.control-panel.index')->with('bassic_settings', $bassic_settings)->with('user_settings', $user_settings);
     }
 
     /**

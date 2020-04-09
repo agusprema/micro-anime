@@ -38,7 +38,8 @@
     @else
     <img style="max-height: 450px" class="img-fluid" src="{{ asset('img/no-image-available.jpg') }}" alt="{{ $anime->title_anime }}" title="{{ $anime->title_anime }}" />
     @endif
-    <span></span>
+    {{-- <span></span> --}}
+    @livewire('history', ['id_anime' => $episode->id_anime, 'id_episode' => $episode->episode])
 </div>
 
 @foreach (\DB::table('ads_banners')->where('type_for', 'anime')->where('expired', '>', date("Y-m-d"))->orderBy('id', 'desc')->limit(1)->get() as $ads_anime)
@@ -77,12 +78,13 @@
             <li><b>Total Episode</b> : @if ($anime->total_anime){{$anime->total_anime}}@else{{__('Unknown')}}@endif</li>
             <li class="genre-detail"><b>Genres</b><span class="text-white"> : </span>
                 @foreach (explode(",", $anime->genre_anime) as $genre)
-                <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>,
+                <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>@if(!$loop->last), @endif
                 @endforeach
             </li>
         </ul>
     </div>
     <div id="share" style="font-size: 12px;"></div>
+    @livewire('book-mark-anime', ['id_anime' => $anime->id_anime])
 </div>
 
 <div class="col-md-9 float-left p-0 pl-2 text-white box-tse">

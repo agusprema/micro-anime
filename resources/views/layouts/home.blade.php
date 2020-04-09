@@ -27,10 +27,11 @@
         <link href="{{ asset('css/jquery.mCustomScrollbar.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        @livewireStyles
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="url-full" content="{{ url()->full() }}">
         <meta name="url" content="{{ url('/') }}">
-        <style>@media (max-width: 400px){.content-calendar img,.box-post img{min-height: 155px !important; max-height: 155px !important;}} @media (max-width: 335px){.col-md-2-a {-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}.content-calendar img,.box-post img{min-height: 200px !important;max-height: 200px !important;}.label-hot, .label-new {font-size: 10px;font-weight: 600;line-height: 14px;}}</style>
 
     </head>
     <body id="page-top" itemscope="itemscope" itemtype="http://schema.org/WebPage">
@@ -78,6 +79,14 @@
                                     </a>
                                     <!-- Dropdown - User Information -->
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                        @hasrole('Moderator')
+                                        <a class="dropdown-item" href="{{ url('moderator') }}"><i class="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-400"></i>Dashboard</a>
+                                        <div class="dropdown-divider"></div>
+                                        @endhasrole
+                                        @hasroles(['Moderator', 'Admin'])
+                                        <a class="dropdown-item" href="{{ url('admin/anime') }}"><i class="fas fa-dragon fa-sm fa-fw mr-2 text-gray-400"></i>Anime Management</a>
+                                        <div class="dropdown-divider"></div>
+                                        @endhasroles
                                         <a class="dropdown-item" href="{{ url('user/bookmark-anime') }}"><i class="fas fa-bookmark fa-sm fa-fw mr-2 text-gray-400"></i>Bookmark Anime</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('user.home') }}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>My Profile</a>
@@ -90,10 +99,6 @@
                                 </li>
                                 <!-- Nav Item - User Information -->
                             </ul>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                                <input type="hidden" name="url" value="{{ url()->full() }}">
-                            </form>
                             @endguest
                             <form class="form-inline my-2 my-lg-0" action="{{ url('/') }}" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                                 <input itemprop="query-input" class="form-control mr-sm-2" type="search" name="s" placeholder="Search" aria-label="Search"><button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
@@ -137,7 +142,7 @@
                                             <div class="genre-post-slider text-capitalize text-secondary">
                                                 <span class="text-white text-monospace">Genres : </span>
                                                 @foreach (explode(",", $slider->genre_anime) as $genre)
-                                                <a class="text-secondary" title="{{ $genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>,
+                                                <a class="text-secondary" title="{{ $genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>@if(!$loop->last), @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -185,11 +190,11 @@
                         @foreach (\DB::table('detail_animes')->where('status_anime', 'Tamat')->orderBy('id', 'desc')->limit(6)->get() as $tamat_box)
                         <div class="col-md-2 box-tamat p-1 float-left">
                             <a href="{{ url('/anime') . '/' . $tamat_box->id_anime }}" title="{{ $tamat_box->title_anime }}">
-                                @ControlPanel('lazy load')
+                                @Settings('bassic_settings.lazy_load.status', 'true')
                                 <img data-src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
                                 @else
                                 <img src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
-                                @endControlPanel
+                                @endSettings
                                 <div class="title-tamat">{{ $tamat_box->title_anime }}</div>
                             </a>
                             @if ($tamat_box->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
@@ -236,7 +241,7 @@
                         <div class="fb-page" data-href="https://www.facebook.com/microanime/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"></div>
                     </div>
 
-                    @ControlPanel('chat box')
+                    @Settings('bassic_settings.chat_box.status', 'true')
                         <div class="box-chat-sidebar pt-1">
                                 <div class="title-widget hidden-chat"><i class="fas fa-comment-dots text-primary pr-1"></i><span>Chat Room</span></div>
 
@@ -244,7 +249,7 @@
                                     <script id="cid0020000226698917551" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 340px;">{"handle":"microanime","arch":"js","styles":{"a":"C8C8C8","b":100,"c":"000000","d":"000000","k":"C8C8C8","l":"C8C8C8","m":"C8C8C8","p":"10","q":"C8C8C8","r":100,"usricon":1.11,"cnrs":"0.36","fwtickm":1}}</script>
                                 </div>
                         </div>
-                    @endControlPanel
+                    @endSettings
 
                     <div class="ads-sidebar pt-1">
                         <a href="" target="_blank">
@@ -252,7 +257,7 @@
                         </a>
                     </div>
 
-                    @guest
+                    {{-- @guest
                     @else
                     @php
                         $hs = \DB::table('history_users')->where('id_user', Auth::user()->id_user)->orderBy('id', 'DESC')->get();
@@ -270,6 +275,10 @@
                         </div>
                     </div>
                     @endif
+                    @endguest --}}
+                    @guest
+                    @else
+                        @livewire('historys')
                     @endguest
 
                     <div class="box-hot-sidebar pt-1">
@@ -281,11 +290,11 @@
                                     <div class="hot-sidebar">
                                         <div class="col-md-3 img-hot-sidebar p-0 pt-1 pb-1 pr-1 float-left">
                                             <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}">
-                                                @ControlPanel('lazy load')
+                                                @Settings('bassic_settings.lazy_load.status', 'true')
                                                 <img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}">
                                                 @else
                                                 <img style="min-height: 84px; height:100%;" src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}">
-                                                @endControlPanel
+                                                @endSettings
                                             </a>
                                             {!! App\Helpers\AnimeLabelHelper::instance()->label_new($hot_sidebar->id_anime, 1) !!}
                                         </div>
@@ -295,7 +304,7 @@
                                         <div class="genre-hot-sidebar text-capitalize text-secondary">
                                             <span class="font-weight-bold text-monospace text-white">Genres : </span>
                                             @foreach (explode(",", $hot_sidebar->genre_anime) as $hot_genre)
-                                            <a class="text-secondary" title="{{ $hot_genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $hot_genre)) }}">{{ $hot_genre }}</a>,
+                                            <a class="text-secondary" title="{{ $hot_genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $hot_genre)) }}">{{ $hot_genre }}</a>@if(!$loop->last), @endif
                                             @endforeach
                                         </div>
                                         <div class="summary-hot-sidebar text-capitalize text-justify">
@@ -329,17 +338,17 @@
                         <!-- Social buttons -->
                         <ul class="list-unstyled list-inline text-center" style="margin-bottom: 7px;">
                             <li class="list-inline-item">
-                                <a href="a" class="btn-floating btn-fb mx-1 text-white">
+                                <a href="{{ env('Link_Facebook', '#') }}" class="btn-floating btn-fb mx-1 text-white">
                                 <i class="fab fa-facebook-f"> </i>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="a" class="btn-floating btn-tw mx-1 text-white">
+                                <a href="{{ env('Link_Twiter', '#') }}" class="btn-floating btn-tw mx-1 text-white">
                                 <i class="fab fa-twitter"> </i>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="a" class="btn-floating btn-instagram mx-1 text-white">
+                                <a href="{{ env('Link_Instagram', '#') }}" class="btn-floating btn-instagram mx-1 text-white">
                                 <i class="fab fa-instagram"> </i>
                                 </a>
                             </li>
@@ -392,6 +401,7 @@
                 </div>
             </div>
         </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf <input type="hidden" name="url" value="{{ url()->full() }}"></form>
         <!-- Logout Modal-->
 
         <!-- Flash Data-->
@@ -401,18 +411,15 @@
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="{{ asset('js/app.js')}}"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> --}}
         <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
         <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151897549-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-151897549-1');
-        </script>
+        <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-151897549-1');</script>
+        @livewireScripts
 
         <script src="{{ asset('js/script.js')}}"></script>
     </body>

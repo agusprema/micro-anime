@@ -7,6 +7,7 @@
 .counter { background-color: #ffffff; padding: 20px 0; border-radius: 5px; margin-top: 30px;}
 .col_fourth { width: 100%;position: relative;display:inline;display: inline-block;float: left;margin-right: 2%;margin-bottom: 20px; }
 .count-title { font-size: 40px; font-weight: normal;  margin-top: 10px; margin-bottom: 0; text-align: center; }
+.count-timer { font-size: 15px; font-weight: normal;  margin-top: 10px; margin-bottom: 0; text-align: center; }
 .count-text { font-size: 13px; font-weight: normal;  margin-top: 10px; margin-bottom: 0; text-align: center; }
 .fa-2x { margin: 0 auto; float: none; display: table; color: #4ad1e5; }
 </style>
@@ -16,7 +17,7 @@
 {!! $chart->script() !!}
 {!! $chart2->script() !!}
 {!! $chart3->script() !!}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 $(document).ready(function() {
     selesai();
 });
@@ -37,7 +38,7 @@ function update() {
         });
 	});
 }
-</script>
+</script> --}}
 @endsection
 
 @section('content')
@@ -55,7 +56,8 @@ function update() {
             <div class="col-md-3 float-left">
                 <div class="counter col_fourth">
                     <i class="fa fa-users fa-2x"></i>
-                    <h2 class="timer count-title" id="visitor">0</h2>
+                    {{-- <h2 class="timer count-title" id="visitor">0</h2> --}}
+                    @livewire('visitor')
                     <p class="count-text ">User visitor</p>
                 </div>
             </div>

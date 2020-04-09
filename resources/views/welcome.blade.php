@@ -10,11 +10,11 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        @ControlPanel('true')
-        <div>Tai 123</div>
+        @Settings('bassic_settings.lazy_load.status', 'true')
+        <div>Tai 1234</div>
         @else
-        <div>Tai 321</div>
-        @endControlPanel
+        <div>Tai 3214</div>
+        @endSettings
 
     </body>
 </html>

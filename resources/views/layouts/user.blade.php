@@ -21,6 +21,7 @@
 <link href="{{ asset('css/amsify.suggestags.css') }}" rel="stylesheet">
 <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/cropper.css') }}" rel="stylesheet" type="text/css">
+@livewireStyles
 @yield('inc_style')
 <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -279,7 +280,7 @@ overflow: hidden;
 
         gtag('config', 'UA-151897549-1');
     </script>
-
+    @livewireScripts
     @yield('inc_script')
 
     <!-- Custom scripts for all pages-->

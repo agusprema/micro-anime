@@ -8,11 +8,11 @@
     @foreach ($animes as $anime)
     <div class="col-md-2-a p-1 box-post float-left">
         <a href="{{ url('/anime') . '/' . $anime->id_anime }}" title="{{ $anime->title_anime }}">
-            @ControlPanel('lazy load')
+            @Settings('bassic_settings.lazy_load.status', 'true')
             <img data-src="{{ $anime->image_anime }}" title="{{ $anime->title_anime }}">
             @else
             <img src="{{ $anime->image_anime }}" title="{{ $anime->title_anime }}">
-            @endControlPanel
+            @endSettings
             <div class="title-post">{{ $anime->title_anime }}</div>
         </a>
 

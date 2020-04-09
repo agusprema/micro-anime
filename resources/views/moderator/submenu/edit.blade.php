@@ -6,6 +6,7 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Edit Sub Menu Management</h1>
 
+<a href="{{ route('moderator.submenu.index') }}" class="btn btn-primary mb-3">Back To Sub Menu</a>
 <div class="row">
     <div class="col-lg">
 

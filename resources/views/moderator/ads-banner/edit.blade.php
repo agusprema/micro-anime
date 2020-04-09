@@ -6,6 +6,7 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Edit Ads Banner Management</h1>
 
+<a href="{{ route('moderator.ads-banner.index') }}" class="btn btn-primary mb-3">Back To Ads Banner</a>
 <div class="row">
     <div class="col-lg">
 

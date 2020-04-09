@@ -147,8 +147,8 @@ class HomeController extends Controller
     public function anime($request)
     {
         $anime = detail_animes::where('id_anime', $request)->first();
-        $episodes = episode_animes::where('id_anime', $request)->orderBy('episode', 'desc')->get();
-        if (Auth::check() && $anime) {
+        $episodes = episode_animes::where('id_anime', $request)->orderBy('episode', 'asc')->get();
+        /* if (Auth::check() && $anime) {
             $list_users = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $anime->id_anime)->first();
 
             if ($list_users) {
@@ -161,8 +161,8 @@ class HomeController extends Controller
         } else {
             $action[0] = 'add-list';
             $action[1] = 'Add list';
-        }
-        return view('home.anime')->with('anime', $anime)->with('episodes', $episodes)->with('action', $action);
+        } */
+        return view('home.anime')->with('anime', $anime)->with('episodes', $episodes);
     }
 
     public function play_anime($request)

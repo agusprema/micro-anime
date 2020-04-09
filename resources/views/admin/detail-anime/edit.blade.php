@@ -6,6 +6,7 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Edit Detail Anime Management</h1>
 
+<a href="{{ route('admin.detail-anime.index') }}" class="btn btn-primary mb-3">Back To Detail Anime</a>
 <div class="row">
     <div class="col-lg">
 

@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', $anime->title_anime . ' | ' ?? 'Anime Not Found'.' | ')
+@section('title', ($anime) ? $anime->title_anime . ' | ' : 'Anime Not Found'.' | ')
 @section('content')
 <!-- post -->
 @if ($anime)
@@ -29,7 +29,7 @@
             <li><b>Total Episode</b> : @if ($anime->total_anime){{$anime->total_anime}}@else{{__('Unknown')}}@endif</li>
             <li class="genre-detail"><b>Genres</b><span class="text-white"> : </span>
                 @foreach (explode(",", $anime->genre_anime) as $genre)
-                <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>,
+                <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>@if(!$loop->last), @endif
                 @endforeach
             </li>
         </ul>
@@ -45,7 +45,8 @@
 
     <div class="mb-2">
         <div id="share" class="float-left" style="font-size: 12px;"></div>
-        <div class="ar-list jssocials-share {{ $action[0] }}" data-anim="{{ $anime->id_anime }}" title="{{ $action[1] }}"></div>
+        @livewire('book-mark-anime', ['id_anime' => $anime->id_anime])
+        {{-- <div class="ar-list jssocials-share {{ $action[0] }}" data-anim="{{ $anime->id_anime }}" title="{{ $action[1] }}"></div> --}}
         <div class="clearfix"></div>
     </div>
 
@@ -76,7 +77,7 @@
         </ul>
     </div>
 
-    <div id="disqus_thread"></div>
+    {{-- <div id="disqus_thread"></div>
 	<script>
 	(function() {
 	var d = document, s = d.createElement('script');
@@ -85,7 +86,7 @@
 	(d.head || d.body).appendChild(s);
 	})();
 	</script>
-	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> --}}
 </div>
 @else
 @include('partials.errors_anime')

@@ -29,20 +29,20 @@ $(document).ready(function(){
         $.Lazy('iFrame', function(element, response) {
             var imageBase = this.config('imageBase');
         });
-        $.ajax({
+        /* $.ajax({
             type: "get",
             url: base_url + "api/hot-views/" + g + "/" + j,
             success: function(m) {
                 console.log(m);
             }
-        });
-        $.ajax({
+        }); */
+        /* $.ajax({
             type: "get",
             url: base_url + "api/history-user/" + j,
             success: function(m) {
                 console.log(m);
             }
-        });
+        }); */
     })
     $(".page-scroll").on("click",function(l){var r=$(this).attr("href"),o=$(r);$("html , body").animate({scrollTop:o.offset().top-60}),l.preventDefault()}),$(window).scroll(function(){100<$(this).scrollTop()?$(".scrollToTop").fadeIn():$(".scrollToTop").fadeOut()});$(".scrollToTop").click(function(){return $("html, body").animate({scrollTop:0},800),!1}),$(".alert").linkify()
     var arr_before=$("[rel=prev]")[0]?$("[rel=prev]")[0].href:"#",arr_after=$("[rel=next]")[0]?$("[rel=next]")[0].href:"#";document.onkeydown=function(e){switch(e.keyCode){case 37:location.href=arr_before;break;case 39:location.href=arr_after}};$("#share").jsSocials({showLabel:!1,showCount:!1,shares:["email","twitter","facebook","googleplus","whatsapp"]});
@@ -92,7 +92,7 @@ $(document).ready(function(){
 
     function sweat_success_list(){Swal.fire({position:"center",type:"success",title:"Your list has been saved",showConfirmButton:!1,timer:1500})}function sweat_error_list(){Swal.fire({position:"center",type:"error",title:"Oops...",text:"Something went wrong!",showConfirmButton:!1,timer:1500})};
 
-    $(document).on("click", ".ar-list.add-list", function(t) {
+    /* $(document).on("click", ".ar-list.add-list", function(t) {
         t.preventDefault();
         var e = $(this).data("anim"),
             s = $(this)
@@ -119,7 +119,7 @@ $(document).ready(function(){
                 }
             }) : sweat_login_list()
         })
-    });
+    }); */
 
     $("#login").click(function(e){
         e.preventDefault();

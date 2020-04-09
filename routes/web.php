@@ -19,6 +19,7 @@ Route::get('/archive/genre', 'Home\HomeController@genres');
 Route::get('/jadwal', 'Home\HomeController@jadwal');
 
 Route::get('/test', 'TestController@index')->middleware(['auth', 'verified', 'auth.moderator']);
+/* Route::get('/test', 'TestController@index'); */
 
 Route::get('/archive/genre/{genre}', 'Home\HomeController@genre');
 Route::get('/anime/{anime}', 'Home\HomeController@anime');
@@ -56,6 +57,7 @@ Route::namespace('Moderator')->prefix('moderator')->middleware(['auth', 'verifie
     Route::resource('/users', 'UsersController', ['except' => ['create', 'show']]);
     Route::resource('/ads-banner', 'AdsBannerController', ['except' => ['create', 'show']]);
     Route::resource('/ads-video', 'AdsVideoController', ['except' => ['create', 'show']]);
+    Route::resource('/general-settings', 'GeneralSettingsController', ['except' => ['create', 'show']]);
 
     Route::get('/roleaccess/{id}', 'RoleAccesscontroller@index');
     Route::post('/changeaccess', 'RoleAccesscontroller@store');
