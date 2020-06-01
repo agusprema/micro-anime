@@ -1,6 +1,5 @@
-@foreach ($bookmarks as $bookmark)
-<div class="col-md-2-a p-1 remove box-post float-left {{ $bookmark->id_anime }}">
-    <div class="btn-close d-none" id="btn-close" wire:click="deleteTodo({{ $bookmark->id_anime }})">Delete X</div>
+<div class="col-md-2-a p-1 remove box-post float-left">
+    <div class="btn-close d-none" id="btn-close" wire:click="delete">Delete X</div>
     <a href="{{ url('anime', $bookmark->id_anime) }}" title="{{ $bookmark->title_anime }}">
         <img src="{{ $bookmark->image_anime }}" title="{{ $bookmark->title_anime }}">
         <div class="title-post">{{ $bookmark->title_anime }}</div>
@@ -16,4 +15,3 @@
         {!! App\Helpers\AnimeLabelHelper::instance()->label_new($bookmark->id_anime) !!}
     </div>
 </div>
-@endforeach

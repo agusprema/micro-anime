@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Moderator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\menu_users;
 
 class MenuController extends Controller
@@ -101,6 +100,7 @@ class MenuController extends Controller
     public function destroy($id)
     {
         menu_users::destroy($id);
+
         return redirect('/moderator/menu')->with('warning', 'Menu has been deleted.');
     }
 }

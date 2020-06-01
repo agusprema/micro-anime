@@ -31,7 +31,7 @@ class AnimeLabelHelper
     public function label_new($id, $class=0)
     {
         $label_new_q = detail_animes::where('id_anime', $id)->first();
-        if(time() - strtotime($label_new_q->created_at) < (60*60*24*60)){
+        if($label_new_q->status_anime == 'Ongoing' && time() - strtotime($label_new_q->created_at) < (60*60*24*60)){
             if($class == 1){
                 $html = "<div class='label-new label-new-hot'>N</div>";
             } else {

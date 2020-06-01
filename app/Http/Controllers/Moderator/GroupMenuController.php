@@ -18,6 +18,7 @@ class GroupMenuController extends Controller
     {
         $group = menu_groups::join('menu_users', 'menu_groups.menu_id', '=', 'menu_users.id')->where('menu_groups.id', '>=', 1)->select('menu_groups.*', 'menu_users.menu')->orderBy('menu_groups.id', 'DESC')->get();
         $menus = menu_users::all();
+
         return view('moderator.group_menu.index')->with('groups', $group)->with('menus', $menus);
     }
 
@@ -40,9 +41,9 @@ class GroupMenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'menu_id' => 'required|integer',
-            'icon' => 'required'
+            'name'      => 'required',
+            'menu_id'   => 'required|integer',
+            'icon'      => 'required'
         ]);
 
         $menu_groups            = new menu_groups;
@@ -73,8 +74,8 @@ class GroupMenuController extends Controller
      */
     public function edit($id)
     {
-        $menu_groups = menu_groups::find($id);
-        $menus = menu_users::all();
+        $menu_groups    = menu_groups::find($id);
+        $menus          = menu_users::all();
         return view('moderator.group_menu.edit')->with('menu_groups', $menu_groups)->with('menus', $menus);
     }
 
@@ -88,9 +89,9 @@ class GroupMenuController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'menu_id' => 'required|integer',
-            'icon' => 'required'
+            'name'      => 'required',
+            'menu_id'   => 'required|integer',
+            'icon'      => 'required'
         ]);
 
         $menu_groups            = menu_groups::find($id);

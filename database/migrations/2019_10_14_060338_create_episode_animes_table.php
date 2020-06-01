@@ -18,9 +18,9 @@ class CreateEpisodeAnimesTable extends Migration
             $table->string('id_anime');
             $table->string('episode');
             $table->string('video');
-            $table->string('download');
-            $table->string('next');
-            $table->string('prev');
+            $table->string('download')->nullable($value = true);
+            $table->string('next')->nullable($value = true);
+            $table->string('prev')->nullable($value = true);
             $table->string('from_micro',1);
             $table->string('author');
             $table->timestamps();

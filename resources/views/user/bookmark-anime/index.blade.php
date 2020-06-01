@@ -232,7 +232,7 @@
 
     @if ($bookmark->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
-    <?php $episode = \DB::table('episode_animes')->where('id_anime', $bookmark->id_anime)->count(); ?>
+    @php $episode = \DB::table('episode_animes')->where('id_anime', $bookmark->id_anime)->count(); @endphp
     <div class="label-episode-right text-white">Episode {{ $episode }}</div>
 
     <div class="label-box">
@@ -242,5 +242,12 @@
 </div>
 @endforeach
 <div class="clearfix"></div>
+{{ $bookmarks->links('vendor.pagination.pagination') }}
+{{-- @foreach ($bookmarks as $bookmark)
+    @livewire('book-mark-anime-user', [
+        'bookmark'  => $bookmark
+    ])
+@endforeach --}}
+
 {{ $bookmarks->links('vendor.pagination.pagination') }}
 @endsection

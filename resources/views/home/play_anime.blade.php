@@ -51,13 +51,13 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center pt-1 pb-2">
         <li class="page-item @if (!$episode->prev)disabled @endif">
-            <a rel="prev" class="page-link" href="@if ($episode->prev) {{ url('/') . '/' . strtolower($episode->prev) }} @endif" @if (!$episode->prev) tabindex="-1" aria-disabled="true" @endif>Previous</i></a>
+            <a rel="prev" class="page-link" href="@if ($episode->prev) {{ route('anime.episode', ['episode' => strtolower($episode->prev)]) }} @endif" @if (!$episode->prev) tabindex="-1" aria-disabled="true" @endif>Previous</i></a>
         </li>
 
-        <li class="page-item"><a class="page-link" href="{{ url('/anime') . '/' . strtolower($episode->id_anime) }}">Semua Episode</a></li>
+        <li class="page-item"><a class="page-link" href="{{ route('anime.details', ['anime' => strtolower($episode->id_anime)]) }}">Semua Episode</a></li>
 
         <li class="page-item @if (!$episode->next)disabled @endif">
-            <a rel="prev" class="page-link" href="@if ($episode->next) {{ url('/') . '/' . strtolower($episode->next) }} @endif" @if (!$episode->next) tabindex="-1" aria-disabled="true" @endif>Next</i></a>
+            <a rel="prev" class="page-link" href="@if ($episode->next) {{ route('anime.episode', ['episode' => strtolower($episode->next)]) }} @endif" @if (!$episode->next) tabindex="-1" aria-disabled="true" @endif>Next</i></a>
         </li>
     </ul>
 </nav>

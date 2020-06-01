@@ -8,17 +8,13 @@ use App\animes;
 use App\detail_animes;
 use App\genres;
 use App\episode_animes;
-use App\list_user_animes;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
         $anime = animes::join('detail_animes', 'animes.id_anime', '=', 'detail_animes.id_anime')->where('detail_animes.title_anime', 'like', '%' . $request->get('s') . '%')->orWhere('detail_animes.alternative_title', 'like', '%' . $request->get('s') . '%')->orderBy('animes.id', 'desc')->paginate(20);
-        if ($request->get('s')) {
-            $anime->setPath(url('/?s=') . $request->get('s'));
-        }
+        if ($request->get('s')) { $anime->setPath(url('/?s=') . $request->get('s')); }
         return view('home.home')->with('animes', $anime);
     }
 
@@ -52,6 +48,7 @@ class HomeController extends Controller
             ->orWhere('title_anime', 'like', '+%')
             ->orWhere('title_anime', 'like', '-%')
             ->orderBy('id', 'desc')->get();
+
         $as = detail_animes::where('title_anime', 'like', 'a%')->orderBy('id', 'desc')->get();
         $bs = detail_animes::where('title_anime', 'like', 'b%')->orderBy('id', 'desc')->get();
         $cs = detail_animes::where('title_anime', 'like', 'c%')->orderBy('id', 'desc')->get();
@@ -78,6 +75,7 @@ class HomeController extends Controller
         $xs = detail_animes::where('title_anime', 'like', 'x%')->orderBy('id', 'desc')->get();
         $ys = detail_animes::where('title_anime', 'like', 'y%')->orderBy('id', 'desc')->get();
         $zs = detail_animes::where('title_anime', 'like', 'z%')->orderBy('id', 'desc')->get();
+
         return view('home.list_anime')
             ->with('as', $as)
             ->with('bs', $bs)
@@ -116,14 +114,14 @@ class HomeController extends Controller
 
     public function jadwal()
     {
-        $senins = detail_animes::where('jadwal_anime', 'Senin')->orderBy('id', 'desc')->get();
-        $selasas = detail_animes::where('jadwal_anime', 'Selasa')->orderBy('id', 'desc')->get();
-        $rabus = detail_animes::where('jadwal_anime', 'Rabu')->orderBy('id', 'desc')->get();
-        $kamiss = detail_animes::where('jadwal_anime', 'Kamis')->orderBy('id', 'desc')->get();
-        $jumats = detail_animes::where('jadwal_anime', 'Jumat')->orderBy('id', 'desc')->get();
-        $sabtus = detail_animes::where('jadwal_anime', 'Sabtu')->orderBy('id', 'desc')->get();
-        $minggus = detail_animes::where('jadwal_anime', 'Minggu')->orderBy('id', 'desc')->get();
-        $randoms = detail_animes::where('jadwal_anime', 'Random')->orderBy('id', 'desc')->get();
+        $senins     = detail_animes::where('jadwal_anime', 'Senin')->orderBy('id', 'desc')->get();
+        $selasas    = detail_animes::where('jadwal_anime', 'Selasa')->orderBy('id', 'desc')->get();
+        $rabus      = detail_animes::where('jadwal_anime', 'Rabu')->orderBy('id', 'desc')->get();
+        $kamiss     = detail_animes::where('jadwal_anime', 'Kamis')->orderBy('id', 'desc')->get();
+        $jumats     = detail_animes::where('jadwal_anime', 'Jumat')->orderBy('id', 'desc')->get();
+        $sabtus     = detail_animes::where('jadwal_anime', 'Sabtu')->orderBy('id', 'desc')->get();
+        $minggus    = detail_animes::where('jadwal_anime', 'Minggu')->orderBy('id', 'desc')->get();
+        $randoms    = detail_animes::where('jadwal_anime', 'Random')->orderBy('id', 'desc')->get();
 
         return view('home.jadwal')
             ->with('senins', $senins)
@@ -138,7 +136,7 @@ class HomeController extends Controller
 
     public function genre($request)
     {
-        $genres = detail_animes::where('genre_anime', 'like', '%' . $request . '%')->paginate(20);
+        $genres     = detail_animes::where('genre_anime', 'like', '%' . $request . '%')->paginate(20);
         $name_genre = $request;
 
         return view('home.genre')->with('genres', $genres)->with('name_genre', $name_genre)->with('title_web', $request);
@@ -146,36 +144,17 @@ class HomeController extends Controller
 
     public function anime($request)
     {
-        $anime = detail_animes::where('id_anime', $request)->first();
-        $episodes = episode_animes::where('id_anime', $request)->orderBy('episode', 'asc')->get();
-        /* if (Auth::check() && $anime) {
-            $list_users = list_user_animes::where('id_user', Auth::user()->id_user)->where('id_anime', $anime->id_anime)->first();
+        $anime      = detail_animes::where('id_anime', $request)->first();
+        $episodes   = episode_animes::where('id_anime', $request)->orderBy('episode', 'desc')->get();
 
-            if ($list_users) {
-                $action[0] = 'remove-list';
-                $action[1] = 'Remove list';
-            } else {
-                $action[0] = 'add-list';
-                $action[1] = 'Add list';
-            }
-        } else {
-            $action[0] = 'add-list';
-            $action[1] = 'Add list';
-        } */
         return view('home.anime')->with('anime', $anime)->with('episodes', $episodes);
     }
 
     public function play_anime($request)
     {
-        /* $episode = episode_animes::where('episode', $request)->where('from_micro', 'Y')->first();
-        if(!$episode){
-            $episode = episode_animes::where('episode', $request)->first();
-        } */
-        $episode = episode_animes::where('episode', $request)->first();
-        $anime = '';
-        if ($episode) {
-            $anime = detail_animes::where('id_anime', $episode->id_anime)->first();
-        }
+        $episode    = episode_animes::where('episode', $request)->first();
+        $anime      = '';
+        if ($episode) { $anime  = detail_animes::where('id_anime', $episode->id_anime)->first(); }
 
         return view('home.play_anime')->with('anime', $anime)->with('episode', $episode);
     }

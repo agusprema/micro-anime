@@ -53,12 +53,12 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
                             <ul class="navbar-nav mr-auto">
                                 <!-- Navbar link -->
-                                <li class="nav-item @if (url('/') == url()->full())active @endif"><a class="nav-link" href="{{ url('/') }}" itemprop="url">Home<span class="sr-only">(current)</span></a></li>
-                                <li class="nav-item @if (url('/ongoing') == url()->full())active @endif"><a class="nav-link" href="{{ url('/ongoing') }}" itemprop="url">Ongoing</a></li>
-                                <li class="nav-item @if (url('/tamat') == url()->full())active @endif"><a class="nav-link" href="{{ url('/tamat') }}" itemprop="url">Tamat</a></li>
-                                <li class="nav-item @if (url('/list-anime') == url()->full())active @endif"><a class="nav-link" href="{{ url('/list-anime') }}" itemprop="url">List Anime</a></li>
-                                <li class="nav-item @if (url('/archive/genre') == url()->full())active @endif"><a class="nav-link" href="{{ url('/archive/genre') }}" itemprop="url">Genre</a></li>
-                                <li class="nav-item @if (url('/jadwal') == url()->full())active @endif"><a class="nav-link" href="{{ url('/jadwal') }}" itemprop="url">Jadwal Rilis</a></li>
+                                <li class="nav-item @if (route('home') == url()->full())active @endif"><a class="nav-link" href="{{ route('home') }}" itemprop="url">Home<span class="sr-only">(current)</span></a></li>
+                                <li class="nav-item @if (route('anime.ongoing') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.ongoing') }}" itemprop="url">Ongoing</a></li>
+                                <li class="nav-item @if (route('anime.end') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.end') }}" itemprop="url">Tamat</a></li>
+                                <li class="nav-item @if (route('anime.list') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.list') }}" itemprop="url">List Anime</a></li>
+                                <li class="nav-item @if (route('archive.genres.list') == url()->full())active @endif"><a class="nav-link" href="{{ route('archive.genres.list') }}" itemprop="url">Genre</a></li>
+                                <li class="nav-item @if (route('anime.schedule') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.schedule') }}" itemprop="url">Jadwal Rilis</a></li>
                                 @guest
                                 <li class="nav-item "><a class="nav-link" id="login" href="">Login</a></li>
                                 @else
@@ -80,18 +80,18 @@
                                     <!-- Dropdown - User Information -->
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                         @hasrole('Moderator')
-                                        <a class="dropdown-item" href="{{ url('moderator') }}"><i class="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-400"></i>Dashboard</a>
+                                        <a class="dropdown-item" href="{{ route('moderator.moderator') }}"><i class="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-400"></i>Dashboard</a>
                                         <div class="dropdown-divider"></div>
                                         @endhasrole
                                         @hasroles(['Moderator', 'Admin'])
-                                        <a class="dropdown-item" href="{{ url('admin/anime') }}"><i class="fas fa-dragon fa-sm fa-fw mr-2 text-gray-400"></i>Anime Management</a>
+                                        <a class="dropdown-item" href="{{ route('admin.anime.index') }}"><i class="fas fa-dragon fa-sm fa-fw mr-2 text-gray-400"></i>Anime Management</a>
                                         <div class="dropdown-divider"></div>
                                         @endhasroles
-                                        <a class="dropdown-item" href="{{ url('user/bookmark-anime') }}"><i class="fas fa-bookmark fa-sm fa-fw mr-2 text-gray-400"></i>Bookmark Anime</a>
+                                        <a class="dropdown-item" href="{{ route('user.bookmark') }}"><i class="fas fa-bookmark fa-sm fa-fw mr-2 text-gray-400"></i>Bookmark Anime</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('user.home') }}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>My Profile</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{ url('user/edit-profile') }}"><i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>Edit Profile</a>
+                                        <a class="dropdown-item" href="{{ route('user.profile.edit') }}"><i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>Edit Profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">Logout</a>
                                     </div>
@@ -100,7 +100,7 @@
                                 <!-- Nav Item - User Information -->
                             </ul>
                             @endguest
-                            <form class="form-inline my-2 my-lg-0" action="{{ url('/') }}" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+                            <form class="form-inline my-2 my-lg-0" action="{{ route('home') }}" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                                 <input itemprop="query-input" class="form-control mr-sm-2" type="search" name="s" placeholder="Search" aria-label="Search"><button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
@@ -137,12 +137,12 @@
                                     <div class="col-sm-9 info-slider-box p-0 pb-2 pt-2 float-left text-white">
                                         <div class="box-rat pb-1">
                                             <div class="ratting-slider text-center float-left pr-2 pt-2"><div class="rat-slider"><span>{{ $slider->rating_anime }}</span></div></div>
-                                            <div class="title-slider text-uppercase"><a href="{{ $slider->id_anime }}" title="{{ $slider->title_anime }}">{{ $slider->title_anime }}</a></div>
+                                            <div class="title-slider text-uppercase"><a href="{{ route('anime.details', ['anime' => $slider->id_anime]) }}" title="{{ $slider->title_anime }}">{{ $slider->title_anime }}</a></div>
                                             <div class="type-post-slider text-capitalize text-primary"><span class="text-white text-monospace">Type : </span><span class="text-uppercase">{{ $slider->type_anime }}</span></div>
                                             <div class="genre-post-slider text-capitalize text-secondary">
                                                 <span class="text-white text-monospace">Genres : </span>
                                                 @foreach (explode(",", $slider->genre_anime) as $genre)
-                                                <a class="text-secondary" title="{{ $genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>@if(!$loop->last), @endif
+                                                <a class="text-secondary" title="{{ $genre }}" href="{{ route('archive.genres.genre', ['genre' => strtolower($genre)]) }}">{{ $genre }}</a>@if(!$loop->last), @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                                         <div class="status-slider pt-1 text-capitalize"><span><strong>Status : </strong>{{ $slider->status_anime }}</span></div>
                                     </div>
                                     <div class="col-sm-2 mt-3 image-slider float-left">
-                                        <a href="{{ url('/anime') . '/' . $slider->id_anime }}" title="{{ $slider->title_anime }}"><img src="{{ $slider->image_anime }}" title="{{ $slider->title_anime }}" class="d-block w-100" alt="{{ $slider->title_anime }}"></a>
+                                        <a href="{{ route('anime.details', ['anime' => $slider->id_anime]) }}" title="{{ $slider->title_anime }}"><img src="{{ $slider->image_anime }}" title="{{ $slider->title_anime }}" class="d-block w-100" alt="{{ $slider->title_anime }}"></a>
                                     </div>
                                 </div>
                             </div>
@@ -186,10 +186,10 @@
 
                     <!-- Anime Complate -->
                     <div class="col-md-12 bg-dark mt-1 pb-2">
-                        <div class="title-widget mb-2"><i class="fas fa-tasks text-success pr-1"></i><span class="text-white">Anime Complete</span><a class="float-right more-tamat" title="More" href="tamat/">More</a></div>
+                        <div class="title-widget mb-2"><i class="fas fa-tasks text-success pr-1"></i><span class="text-white">Anime Complete</span><a class="float-right more-tamat" title="More" href="{{ route('anime.end') }}">More</a></div>
                         @foreach (\DB::table('detail_animes')->where('status_anime', 'Tamat')->orderBy('id', 'desc')->limit(6)->get() as $tamat_box)
                         <div class="col-md-2 box-tamat p-1 float-left">
-                            <a href="{{ url('/anime') . '/' . $tamat_box->id_anime }}" title="{{ $tamat_box->title_anime }}">
+                            <a href="{{ route('anime.details', ['anime' => $tamat_box->id_anime]) }}" title="{{ $tamat_box->title_anime }}">
                                 @Settings('bassic_settings.lazy_load.status', 'true')
                                 <img data-src="{{ $tamat_box->image_anime }}" title="{{ $tamat_box->title_anime }}">
                                 @else
@@ -199,7 +199,8 @@
                             </a>
                             @if ($tamat_box->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
-                            <?php $episode = \DB::table('episode_animes')->where('id_anime', $tamat_box->id_anime)->count(); ?>
+                            @php $episode = \DB::table('episode_animes')->where('id_anime', $tamat_box->id_anime)->count(); @endphp
+
                             <div class="label-episode-right text-white">Episode {{ $episode }}</div>
 
                             <div class="label-box">
@@ -230,7 +231,7 @@
                         <div class="content-genre-sidebar">
                             <ul class="genre-sidebar overflow-auto mCustomScrollbar text-capitalize" data-mcs-theme="minimal-dark">
                             @foreach (\DB::table('genres')->orderBy('genre')->get() as $genre)
-                                <li><a class="text-truncate" title="{{ str_replace("-", " ", $genre->genre) }}" href="{{ url('/archive/genre') . '/' . strtolower($genre->genre) }}">{{ str_replace("-", " ", $genre->genre) }}</a></li>
+                                <li><a class="text-truncate" title="{{ str_replace("-", " ", $genre->genre) }}" href="{{ route('archive.genres.genre', ['genre' => strtolower($genre->genre)]) }}">{{ str_replace("-", " ", $genre->genre) }}</a></li>
                             @endforeach
                             </ul>
                         </div>
@@ -289,7 +290,7 @@
                                 @foreach (\DB::table('detail_animes')->join('amount_hot_animes', 'detail_animes.id_anime', '=', 'amount_hot_animes.id_anime')->orderBy('amount_hot_animes.amount_views', 'DESC')->where('amount_hot_animes.season_anime', App\Helpers\AnimeLabelHelper::instance()->season_anime())->limit(5)->get() as $hot_sidebar)
                                     <div class="hot-sidebar">
                                         <div class="col-md-3 img-hot-sidebar p-0 pt-1 pb-1 pr-1 float-left">
-                                            <a href="{{ url('/anime') . '/' . $hot_sidebar->id_anime }}" title="{{ $hot_sidebar->title_anime }}">
+                                            <a href="{{ route('anime.details', ['anime' => $hot_sidebar->id_anime]) }}" title="{{ $hot_sidebar->title_anime }}">
                                                 @Settings('bassic_settings.lazy_load.status', 'true')
                                                 <img style="min-height: 84px; height:100%;" data-src="{{ $hot_sidebar->image_anime }}" class="d-block w-100" alt="{{ $hot_sidebar->title_anime }}">
                                                 @else
@@ -304,7 +305,7 @@
                                         <div class="genre-hot-sidebar text-capitalize text-secondary">
                                             <span class="font-weight-bold text-monospace text-white">Genres : </span>
                                             @foreach (explode(",", $hot_sidebar->genre_anime) as $hot_genre)
-                                            <a class="text-secondary" title="{{ $hot_genre }}" href="{{ url('/archive/genre') . '/' . strtolower(str_replace(",", "", $hot_genre)) }}">{{ $hot_genre }}</a>@if(!$loop->last), @endif
+                                            <a class="text-secondary" title="{{ $hot_genre }}" href="{{ route('archive.genres.genre', ['genre' => strtolower($hot_genre)])}}">{{ $hot_genre }}</a>@if(!$loop->last), @endif
                                             @endforeach
                                         </div>
                                         <div class="summary-hot-sidebar text-capitalize text-justify">
@@ -359,7 +360,7 @@
 
                     <!-- Copyright -->
                     <div class="footer-copyright text-center py-2">© 2019 - <?= date("Y");?> Copyright:
-                        <a href="{{ url('/') }}">{{ config('app.name') }}</a>
+                        <a href="{{ route('home') }}">{{ config('app.name') }}</a>
                     </div>
                     <!-- Copyright -->
                 </div>

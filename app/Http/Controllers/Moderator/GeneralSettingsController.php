@@ -15,8 +15,9 @@ class GeneralSettingsController extends Controller
      */
     public function index()
     {
-        $bassic_settings = Setting::get('bassic_settings');
-        $user_settings = Setting::get('user_settings');
+        $bassic_settings    = Setting::get('bassic_settings');
+        $user_settings      = Setting::get('user_settings');
+
         return view('moderator.control-panel.index')->with('bassic_settings', $bassic_settings)->with('user_settings', $user_settings);
     }
 

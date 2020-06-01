@@ -7,7 +7,7 @@
 
     @foreach ($ongoings as $ongoing)
     <div class="col-md-2-a p-1 box-post float-left">
-        <a href="{{ url('/anime') . '/' . $ongoing->id_anime }}" title="{{ $ongoing->title_anime }}">
+        <a href="{{ route('anime.details', ['anime' => $ongoing->id_anime]) }}" title="{{ $ongoing->title_anime }}">
             @Settings('bassic_settings.lazy_load.status', 'true')
             <img data-src="{{ $ongoing->image_anime }}" title="{{ $ongoing->title_anime }}">
             @else
@@ -18,8 +18,7 @@
 
         @if ($ongoing->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
-        <?php $episode = \DB::table('episode_animes')->where('id_anime', $ongoing->id_anime)->count(); ?>
-        <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+        <div class="label-episode-right text-white">Episode {{ \DB::table('episode_animes')->where('id_anime', $ongoing->id_anime)->count() }}</div>
 
         <div class="label-box">
             {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($ongoing->id_anime) !!}

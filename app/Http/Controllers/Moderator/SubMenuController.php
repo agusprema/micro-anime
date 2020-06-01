@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\sub_menu_users;
 use Illuminate\Http\Request;
-use App\Helpers\Easy;
 
 class SubMenuController extends Controller
 {
@@ -17,9 +16,10 @@ class SubMenuController extends Controller
      */
     public function index()
     {
-        $sub_menus = DB::table('sub_menu_users')->join('menu_users', 'sub_menu_users.menu_id', '=', 'menu_users.id')->join('menu_groups', 'sub_menu_users.group_id', '=', 'menu_groups.id')->select('sub_menu_users.*', 'menu_users.menu', DB::raw('menu_groups.name AS g_name'))->orderBy('sub_menu_users.id', 'DESC')->get();
-        $menus = DB::table('menu_users')->get();
-        $groups = DB::table('menu_groups')->where('id', '>=', 1)->get();
+        $sub_menus  = DB::table('sub_menu_users')->join('menu_users', 'sub_menu_users.menu_id', '=', 'menu_users.id')->join('menu_groups', 'sub_menu_users.group_id', '=', 'menu_groups.id')->select('sub_menu_users.*', 'menu_users.menu', DB::raw('menu_groups.name AS g_name'))->orderBy('sub_menu_users.id', 'DESC')->get();
+        $menus      = DB::table('menu_users')->get();
+        $groups     = DB::table('menu_groups')->where('id', '>=', 1)->get();
+
         return view('moderator.submenu.index')->with('sub_menus', $sub_menus)->with('menus', $menus)->with('groups', $groups);
     }
 
@@ -42,18 +42,14 @@ class SubMenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'menu_id' => 'required|integer',
-            'group_id' => 'required|integer',
-            'url' => 'required',
-            'icon' => 'required'
+            'title'     => 'required',
+            'menu_id'   => 'required|integer',
+            'group_id'  => 'required|integer',
+            'url'       => 'required',
+            'icon'      => 'required'
         ]);
 
-        if($request->is_active){
-            $active = $request->is_active;
-        } else {
-            $active = 0;
-        }
+        if($request->is_active){ $active = $request->is_active; } else { $active = 0; }
 
         $sub_menu_users             = new sub_menu_users;
         $sub_menu_users->title      = $request->title;
@@ -86,9 +82,9 @@ class SubMenuController extends Controller
      */
     public function edit($request)
     {
-        $menus = DB::table('menu_users')->get();
+        $menus          = DB::table('menu_users')->get();
         $sub_menu_users = sub_menu_users::find($request);
-        $groups = DB::table('menu_groups')->where('id', '>=', 1)->get();
+        $groups         = DB::table('menu_groups')->where('id', '>=', 1)->get();
         return view('moderator.submenu.edit')->with('sub_menu_users', $sub_menu_users)->with('menus', $menus)->with('groups', $groups);
     }
 
@@ -102,11 +98,11 @@ class SubMenuController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'menu_id' => 'required|integer',
-            'group_id' => 'required|integer',
-            'url' => 'required',
-            'icon' => 'required'
+            'title'     => 'required',
+            'menu_id'   => 'required|integer',
+            'group_id'  => 'required|integer',
+            'url'       => 'required',
+            'icon'      => 'required'
         ]);
 
         if($request->is_active){

@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'profile_image' => 'default.jpg',
             'thumbnail_image' => 'default.jpg',
             'password' => Hash::make($data['password'])
+            /* 'api_token' => Str::random(80) */
         ]);
 
         $role = Role::select('id')->where('name', 'user')->first();

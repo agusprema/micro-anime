@@ -11,7 +11,7 @@
 
             @foreach ($senins as $senin)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $senin->id_anime }}" title="{{ $senin->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $senin->id_anime]) }}" title="{{ $senin->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $senin->image_anime }}" title="{{ $senin->title_anime }}">
                     @else
@@ -44,7 +44,7 @@
 
             @foreach ($selasas as $selasa)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $selasa->id_anime }}" title="{{ $selasa->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $selasa->id_anime]) }}" title="{{ $selasa->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $selasa->image_anime }}" title="{{ $selasa->title_anime }}">
                     @else
@@ -77,7 +77,7 @@
 
             @foreach ($rabus as $rabu)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $rabu->id_anime }}" title="{{ $rabu->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $rabu->id_anime]) }}" title="{{ $rabu->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $rabu->image_anime }}" title="{{ $rabu->title_anime }}">
                     @else
@@ -110,7 +110,7 @@
 
             @foreach ($kamiss as $kamis)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $kamis->id_anime }}" title="{{ $kamis->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $kamis->id_anime]) }}" title="{{ $kamis->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $kamis->image_anime }}" title="{{ $kamis->title_anime }}">
                     @else
@@ -143,7 +143,7 @@
 
             @foreach ($jumats as $jumat)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $jumat->id_anime }}" title="{{ $jumat->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $jumat->id_anime]) }}" title="{{ $jumat->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $jumat->image_anime }}" title="{{ $jumat->title_anime }}">
                     @else
@@ -176,7 +176,7 @@
 
             @foreach ($sabtus as $sabtu)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $sabtu->id_anime }}" title="{{ $sabtu->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $sabtu->id_anime]) }}" title="{{ $sabtu->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $sabtu->image_anime }}" title="{{ $sabtu->title_anime }}">
                     @else
@@ -209,7 +209,7 @@
 
             @foreach ($minggus as $minggu)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $minggu->id_anime }}" title="{{ $minggu->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $minggu->id_anime]) }}" title="{{ $minggu->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $minggu->image_anime }}" title="{{ $minggu->title_anime }}">
                     @else
@@ -242,7 +242,7 @@
 
             @foreach ($randoms as $random)
             <div class="col-md-2-a p-1 float-left">
-                <a href="{{ url('/anime') . '/' . $random->id_anime }}" title="{{ $random->title_anime }}">
+                <a href="{{ route('anime.details', ['anime' => $random->id_anime]) }}" title="{{ $random->title_anime }}">
                     @Settings('bassic_settings.lazy_load.status', 'true')
                     <img data-src="{{ $random->image_anime }}" title="{{ $random->title_anime }}">
                     @else

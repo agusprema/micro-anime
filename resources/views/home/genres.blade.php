@@ -6,7 +6,7 @@
 
 <div class="content-genre-list text-center">
     @foreach ($genres as $genre)
-    <a class="btn btn-light p-1 mb-2 ml-2" href="{{ url('/archive/genre') . '/' . strtolower($genre->genre) }}" title="{{ str_replace("-", " ", $genre->genre) }}">{{ str_replace("-", " ", $genre->genre) }}</a>
+    <a class="btn btn-light p-1 mb-2 ml-2" href="{{ route('archive.genres.genre', ['genre' => strtolower($genre->genre)]) }}" title="{{ str_replace("-", " ", $genre->genre) }}">{{ str_replace("-", " ", $genre->genre) }}</a>
     @endforeach
 </div>
 

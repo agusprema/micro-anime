@@ -7,7 +7,7 @@
 
     @foreach ($tamats as $tamat)
     <div class="col-md-2-a p-1 box-post float-left">
-        <a href="{{ url('/anime') . '/' . $tamat->id_anime }}" title="{{ $tamat->title_anime }}">
+        <a href="{{ route('anime.details', ['anime' => $tamat->id_anime]) }}" title="{{ $tamat->title_anime }}">
             @Settings('bassic_settings.lazy_load.status', 'true')
             <img data-src="{{ $tamat->image_anime }}" title="{{ $tamat->title_anime }}">
             @else
@@ -18,8 +18,7 @@
 
         @if ($tamat->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
-        <?php $episode = \DB::table('episode_animes')->where('id_anime', $tamat->id_anime)->count(); ?>
-        <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+        <div class="label-episode-right text-white">Episode {{ \DB::table('episode_animes')->where('id_anime', $tamat->id_anime)->count() }}</div>
 
         <div class="label-box">
             {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($tamat->id_anime) !!}

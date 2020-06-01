@@ -51,7 +51,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="newMenuModalLabel">Add New Menu</h5>
+                <h5 class="modal-title" id="newMenuModalLabel">Add New Group Menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -61,7 +61,7 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name Role" value="{{ old('name') }}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name Group menu" value="{{ old('name') }}">
 
                         @error('name')
                         <small class="text-danger">{{ $message }}</small>

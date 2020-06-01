@@ -15,7 +15,8 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        return $next($request)->header('Access-Control-Allow-Origin', 'http://micro.com', 'http://micro-anime.com')
+        /* http://micro.com */
+        return $next($request)->header('Access-Control-Allow-Origin', '*', 'http://micro-anime.com')
         ->header('Access-Control-Allow-Methods','GET')
         ->header('Content-Type','application/json', 'application/javascript');
     }

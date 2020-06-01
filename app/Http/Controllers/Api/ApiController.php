@@ -31,11 +31,11 @@ class ApiController extends Controller
         }
     }
 
-/*     public function RuleAnime($value)
+    public function RuleAnime($value)
     {
         $anime_hash = strtolower(str_replace(" ", "-", str_replace("`", "", str_replace("~", "", str_replace(" -", "", str_replace("'", "", preg_replace('~[\\\\/:*?!@#$%^&()"<>,|.]~', '', $value)))))));
         return $anime_hash;
-    } */
+    }
 
 /*     public function add_list($id)
     {
@@ -82,7 +82,7 @@ class ApiController extends Controller
         }
     } */
 
-/*     public function remove_list($id)
+    public function remove_list($id)
     {
         if (!Auth::check()) {
             return response()->json([
@@ -123,7 +123,7 @@ class ApiController extends Controller
                 }
             }
         }
-    } */
+    }
 
     /* public function visitor_counter()
     {

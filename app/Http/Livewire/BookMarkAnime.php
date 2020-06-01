@@ -6,7 +6,6 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\detail_animes;
 use App\list_user_animes;
-use UxWeb\SweetAlert\SweetAlert;
 
 class BookMarkAnime extends Component
 {

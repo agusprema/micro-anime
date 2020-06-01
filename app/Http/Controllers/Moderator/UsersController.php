@@ -39,7 +39,7 @@ class UsersController extends Controller
     {
         $roles = Role::all();
         return view('moderator.users.edit')->with([
-            'user' => $user,
+            'user'  => $user,
             'roles' => $roles
         ]);
     }
@@ -69,12 +69,16 @@ class UsersController extends Controller
         if(auth::user()->id == $user->id){
             return redirect()->route('moderator.users.index')->with('warning', 'You are not allowed to delete yourselft.');
         }
+
         if($user->email !== 'agusprema@gmail.com'){
             list_user_animes::where('id_user', $user->id_user)->delete();
+
             if($user->profile_image !== 'default.jpg'){Storage::delete('public/user/profile/' . $user->profile_image);}
             if($user->thumbnail_image !== 'default.jpg'){Storage::delete('public/user/thumb/' . $user->thumbnail_image);}
+
             $user->roles()->detach();
             $user->delete();
+
             return redirect()->route('moderator.users.index')->with('warning', 'User has been deleted.');
         }
 

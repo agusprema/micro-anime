@@ -29,7 +29,7 @@
             <li><b>Total Episode</b> : @if ($anime->total_anime){{$anime->total_anime}}@else{{__('Unknown')}}@endif</li>
             <li class="genre-detail"><b>Genres</b><span class="text-white"> : </span>
                 @foreach (explode(",", $anime->genre_anime) as $genre)
-                <a class="text-secondary" href="{{ url('archive/genre/') . '/' . strtolower(str_replace(",", "", $genre)) }}">{{ $genre }}</a>@if(!$loop->last), @endif
+                <a class="text-secondary" href="{{ route('archive.genres.genre', ['genre' => strtolower($genre)]) }}">{{ $genre }}</a>@if(!$loop->last), @endif
                 @endforeach
             </li>
         </ul>
@@ -60,7 +60,7 @@
             @if ($episodes)
             @foreach ($episodes as $episode)
             <li>
-                <a class="float-left" href="{{ url('/') . '/' . strtolower(str_replace(" ", "-", $episode->episode)) }}">{{ str_replace("-", " ", str_replace(''.$episode->id_anime.'', "", $episode->episode)) }}</a>
+                <a class="float-left" href="{{ route('anime.episode', ['episode' => strtolower(str_replace(" ", "-", $episode->episode))]) }}">{{ str_replace("-", " ", str_replace(''.$episode->id_anime.'', "", $episode->episode)) }}</a>
 
                 @if ($episode->download)
                 <form action="@if ($episode->from_micro == 'Y'){{ 'http://micro.com/'. $episode->download . '/download' }}@else {{ $episode->download }} @endif" method="post" class="float-right">

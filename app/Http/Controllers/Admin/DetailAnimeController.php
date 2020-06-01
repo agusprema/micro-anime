@@ -50,17 +50,17 @@ class DetailAnimeController extends Controller
         $input = ['locales' => $gen];
 
         $request->validate($input,[
-            'id_anime' => 'required',
-            'title_anime' => 'required',
-            'summary_anime' => 'required',
-            'rating_anime' => 'numeric',
-            'status_anime' => 'required|in:Ongoing,Tamat',
-            'type_anime' => 'required|in:TV,OVA,Movie',
-            'total_anime' => 'integer',
-            'genre_anime' => 'required|in_array:locales.*',
-            'jadwal_anime' => 'required|in:none,senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu,Random',
-            'image_anime' => 'required',
-            'background_anime' => 'nullable'
+            'id_anime'          => 'required',
+            'title_anime'       => 'required',
+            'summary_anime'     => 'required',
+            'rating_anime'      => 'numeric',
+            'status_anime'      => 'required|in:Ongoing,Tamat',
+            'type_anime'        => 'required|in:TV,OVA,Movie',
+            'total_anime'       => 'integer',
+            'genre_anime'       => 'required|in_array:locales.*',
+            'jadwal_anime'      => 'required|in:none,senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu,Random',
+            'image_anime'       => 'required',
+            'background_anime'  => 'nullable'
         ]);
 
         $detail_animes                      = new detail_animes;
@@ -120,17 +120,17 @@ class DetailAnimeController extends Controller
         $input = ['locales' => $gen];
 
         $request->validate($input,[
-            'id_anime' => 'required',
-            'title_anime' => 'required',
-            'summary_anime' => 'required',
-            'rating_anime' => 'numeric',
-            'status_anime' => 'required|in:Ongoing,Tamat',
-            'type_anime' => 'required|in:TV,OVA,Movie',
-            'total_anime' => 'integer',
-            'genre_anime' => 'required|in_array:locales.*',
-            'jadwal_anime' => 'required|in:none,senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu,Random',
-            'image_anime' => 'required',
-            'background_anime' => 'nullable'
+            'id_anime'          => 'required',
+            'title_anime'       => 'required',
+            'summary_anime'     => 'required',
+            'rating_anime'      => 'numeric',
+            'status_anime'      => 'required|in:Ongoing,Tamat',
+            'type_anime'        => 'required|in:TV,OVA,Movie',
+            'total_anime'       => 'integer',
+            'genre_anime'       => 'required|in_array:locales.*',
+            'jadwal_anime'      => 'required|in:none,senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu,Random',
+            'image_anime'       => 'required',
+            'background_anime'  => 'nullable'
         ]);
 
         $detail_animes                      = detail_animes::find($id);

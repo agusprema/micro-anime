@@ -51,6 +51,7 @@ class EpisodeController extends Controller
         ]);
 
         $episode_query = str_replace(" ", "-", $this->RuleAnime($request->id_anime) . ' Episode ' . $request->episode);
+
         if($request->next){$next = str_replace(" ", "-", $this->RuleAnime($request->id_anime) . ' Episode ' . $request->next);} else {$next = null;}
         if($request->prev){$prev = str_replace(" ", "-", $this->RuleAnime($request->id_anime) . ' Episode ' . $request->prev);} else {$prev = null;}
         if($request->from_micro){$from_micro = $request->from_micro;} else {$from_micro = "N";}
