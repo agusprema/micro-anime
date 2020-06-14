@@ -31,13 +31,14 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="url-full" content="{{ url()->full() }}">
-        <meta name="url" content="{{ url('/') }}">
+        <meta name="url" content="{{ route('home') }}">
 
     </head>
     <body id="page-top" itemscope="itemscope" itemtype="http://schema.org/WebPage">
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v4.0&appId=130276754472583&autoLogAppEvents=1"></script>
-        <div id="app" style="display:none">
+
+        <div style="display:none">
             <h2>nonton</h2><h2>nonton online</h2><h2>nonton anime sub indo</h2><h2>nonton anime subtitle indonesia</h2><h2>nonton anime bahasa indonesia</h2><h3>nonton anime online</h3><h2>nonton gratis anime</h2><h3>nonton</h3><h3>nonton gratis anime</h3><h3>nonton online</h3><h2>download</h2><h2>download online</h2><h2>download anime sub indo</h2><h2>download anime subtitle indonesia</h2><h2>download anime bahasa indonesia</h2><h3>download anime online</h3><h2>download gratis anime</h2><h3>download</h3><h3>download gratis anime</h3><h3>download online</h3><h2>streaming </h2><h2>streaming online</h2><h2>streaming anime sub indo</h2><h2>streaming anime subtitle indonesia</h2><h2>streaming anime bahasa indonesia</h2><h3>streaming anime online</h3><h2>streaming gratis anime</h2><h3>streaming</h3><h3>streaming gratis anime</h3><h3>streaming online</h3>
         </div>
 
@@ -53,12 +54,12 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
                             <ul class="navbar-nav mr-auto">
                                 <!-- Navbar link -->
-                                <li class="nav-item @if (route('home') == url()->full())active @endif"><a class="nav-link" href="{{ route('home') }}" itemprop="url">Home<span class="sr-only">(current)</span></a></li>
-                                <li class="nav-item @if (route('anime.ongoing') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.ongoing') }}" itemprop="url">Ongoing</a></li>
-                                <li class="nav-item @if (route('anime.end') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.end') }}" itemprop="url">Tamat</a></li>
-                                <li class="nav-item @if (route('anime.list') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.list') }}" itemprop="url">List Anime</a></li>
-                                <li class="nav-item @if (route('archive.genres.list') == url()->full())active @endif"><a class="nav-link" href="{{ route('archive.genres.list') }}" itemprop="url">Genre</a></li>
-                                <li class="nav-item @if (route('anime.schedule') == url()->full())active @endif"><a class="nav-link" href="{{ route('anime.schedule') }}" itemprop="url">Jadwal Rilis</a></li>
+                                <li class="nav-item {{ route('home') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('home') }}" itemprop="url">Home<span class="sr-only">(current)</span></a></li>
+                                <li class="nav-item {{ route('anime.ongoing') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('anime.ongoing') }}" itemprop="url">Ongoing</a></li>
+                                <li class="nav-item {{ route('anime.end') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('anime.end') }}" itemprop="url">Tamat</a></li>
+                                <li class="nav-item {{ route('anime.list') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('anime.list') }}" itemprop="url">List Anime</a></li>
+                                <li class="nav-item {{ route('archive.genres.list') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('archive.genres.list') }}" itemprop="url">Genre</a></li>
+                                <li class="nav-item {{ route('anime.schedule') == url()->full() ? 'active' : '' }}"><a class="nav-link" href="{{ route('anime.schedule') }}" itemprop="url">Jadwal Rilis</a></li>
                                 @guest
                                 <li class="nav-item "><a class="nav-link" id="login" href="">Login</a></li>
                                 @else
@@ -101,7 +102,7 @@
                             </ul>
                             @endguest
                             <form class="form-inline my-2 my-lg-0" action="{{ route('home') }}" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
-                                <input itemprop="query-input" class="form-control mr-sm-2" type="search" name="s" placeholder="Search" aria-label="Search"><button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                                <input itemprop="query-input" class="form-control mr-sm-2" type="search" name="s" placeholder="Search" aria-label="Search" value="{{ isset($_GET['s']) ? $_GET['s'] : "" }}" ><button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
                     </div>
@@ -113,7 +114,7 @@
         <!-- Header -->
 
         <!-- Main -->
-        <main>
+        <main id="app">
             <div class="container">
                 <!-- Ads Banner -->
                 <div class="col-md-12 p-0 pb-2 mt-2">
@@ -169,12 +170,15 @@
                         </div>
                     </div>
                     <!-- Slider -->
-
+                    @php $announcements = \DB::table('announcements')->where('type_for', 'user')->get(); @endphp
+                    @if ($announcements)
                     <!-- Announcements -->
-                    @foreach (\DB::table('announcements')->where('type_for', 'user')->get() as $alert)
+                    @foreach ($announcements as $alert)
                     <div class="alert alert-{{$alert->type}} mt-2 mb-2" role="alert"><i class="fas fa-bell"></i>: {{ $alert->announcement }}</div>
                     @endforeach
                     <!-- Announcements -->
+                    @endif
+
 
                     <!-- Ads Banner -->
                     <div class="col-md-12 p-0 mb-2">
@@ -254,7 +258,7 @@
 
                     <div class="ads-sidebar pt-1">
                         <a href="" target="_blank">
-                            <img class="w-100" src="https://3.bp.blogspot.com/-lZARqFxwBNA/XSgFltAQoMI/AAAAAAAD5rE/0MTeGBJPUbAcQqDvsTGvHCXcO4lgpE9HwCLcBGAs/s1600/ligahokie.gif" alt="">
+                            <img class="w-100" src="http://micro.com/storage/zJa0mhE73b85ZHzVVWdsJc0XkT9VmhFTmXUFLx0l.gif" alt="">
                         </a>
                     </div>
 

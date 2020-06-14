@@ -94,7 +94,7 @@ overflow: hidden;
 
     @foreach ($menu as $sb_menu)
     @if ($sb_menu->group_id == 0)
-    <li class="nav-item @if (url()->full() == url($sb_menu->url))active @endif">
+    <li class="nav-item {{ Request::is($sb_menu->url) ? 'active' : '' }}">
         <a class="nav-link pb-0" href="{{ url($sb_menu->url) }}/">
             <i class="fa-fw {{ $sb_menu->icon }}"></i>
             <span>{{ $sb_menu->title }}</span>
@@ -114,15 +114,15 @@ overflow: hidden;
             ->get();
     @endphp
     <li class="nav-item">
-        <a class="nav-link pb-0 @foreach ($menu_group as $m_group)@if (url()->full() == url($m_group->url))collapsed @endif @endforeach" href="#" data-toggle="collapse" data-target="#collapse{{ $group_menu->g_id }}" aria-expanded="false" aria-controls="collapse{{ $group_menu->g_id }}">
+        <a class="nav-link pb-0 @foreach ($menu_group as $m_group) {{ Request::is($m_group->url.'*') ? 'collapsed' : '' }} @endforeach" href="#" data-toggle="collapse" data-target="#collapse{{ $group_menu->g_id }}" aria-expanded="false" aria-controls="collapse{{ $group_menu->g_id }}">
             <i class="fa-fw {{ $group_menu->g_icon }}"></i>
             <span>{{ $group_menu->g_name }}</span>
         </a>
-        <div id="collapse{{ $group_menu->g_id }}" class="collapse @foreach ($menu_group as $m_group)@if (url()->full() == url($m_group->url))show @endif @endforeach" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapse{{ $group_menu->g_id }}" class="collapse @foreach ($menu_group as $m_group) {{ Request::is($m_group->url.'*') ? 'show' : '' }} @endforeach" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">{{ $group_menu->g_name }}</h6>
             @foreach ($menu_group as $m_group)
-            <a class="collapse-item @if (url()->full() == url($m_group->url))active @endif" href="{{ url($m_group->url) }}/">{{ $m_group->title }}</a>
+            <a class="collapse-item {{ Request::is($m_group->url.'*') ? 'active' : '' }}" href="{{ url($m_group->url) }}/">{{ $m_group->title }}</a>
             @endforeach
             </div>
         </div>

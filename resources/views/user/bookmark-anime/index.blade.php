@@ -18,10 +18,6 @@
         font-size: 11px
     }
 
-    .mbs-40 {
-        margin-bottom: 20px
-    }
-
     .label-episode-right,
     .label-episode-left,
     .label-ongoing,
@@ -52,7 +48,7 @@
         width: 100%
     }
 
-    .col-md-2-a {
+    .box-bookmark-anime {
         -ms-flex: 0 0 10%;
         flex: 0 0 10%;
         max-width: 10%;
@@ -122,46 +118,6 @@
         transform: translate(-50%)
     }
 
-    @media (max-width:500px) {
-        .col-md-2-a {
-            -ms-flex: 0 0 33.33333%!important;
-            flex: 0 0 33.33333%!important;
-            max-width: 33.33333%!important
-        }
-        .box-post img {
-            min-height: 170px;
-            max-height: 170px
-        }
-    }
-
-    @media (max-width:360px) {
-        .box-post img {
-            min-height: 200px;
-            max-height: 200px
-        }
-        .col-md-2-a {
-            -ms-flex: 0 0 50%!important;
-            flex: 0 0 50%!important;
-            max-width: 50%!important
-        }
-    }
-
-    @media (max-width:1280px) {
-        .col-md-2-a {
-            -ms-flex: 0 0 15%;
-            flex: 0 0 15%;
-            max-width: 15%
-        }
-    }
-
-    @media (max-width:900px) {
-        .col-md-2-a {
-            -ms-flex: 0 0 33.3333%;
-            flex: 0 0 33.3333%;
-            max-width: 33.3333%
-        }
-    }
-
     .btn-close:hover {
         opacity: .8
     }
@@ -179,14 +135,43 @@
         float: right
     }
 
+    @media (max-width:1440px) {
+        .box-bookmark-anime {
+            -ms-flex: 0 0 14.28%;
+            flex: 0 0 14.28%;
+            max-width: 14.28%;
+        }
+    }
+
+    @media (max-width:1280px) {
+        .box-bookmark-anime {
+            -ms-flex: 0 0 16%;
+            flex: 0 0 16%;
+            max-width: 16%;
+        }
+    }
+
     @media (max-width:900px) {
         .flr {
             float: left
         }
-        .col-md-2-a {
+
+        .box-bookmark-anime {
             -ms-flex: 0 0 25%;
             flex: 0 0 25%;
-            max-width: 25%
+            max-width: 25%;
+        }
+    }
+
+    @media (max-width:500px) {
+        .box-bookmark-anime {
+            -ms-flex: 0 0 33.33333%!important;
+            flex: 0 0 33.33333%!important;
+            max-width: 33.33333%!important
+        }
+        .box-post img {
+            min-height: 170px;
+            max-height: 170px
         }
     }
 
@@ -196,15 +181,27 @@
             font-size: 10px !important;
         }
     }
+
+    @media (max-width:375px) {
+        .box-post img {
+            min-height: 200px;
+            max-height: 200px
+        }
+        .box-bookmark-anime {
+            -ms-flex: 0 0 50%!important;
+            flex: 0 0 50%!important;
+            max-width: 50%!important
+        }
+    }
 </style>
 @endsection
 @section('content')
-<div class="baba">
+<div class="container-bookmmark-anime">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Sub Menu Management</h1>
-    <form class="float-left" action="{{ url()->full() }}" method="get">
+    <form class="float-left" action="{{ route('user.bookmark') }}" method="get">
         <div class="input-group">
-            <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+            <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" value="{{ isset($_GET['s']) ? $_GET['s'] : "" }}">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
             </div>
@@ -223,7 +220,7 @@
     </div>
 </div>
 @foreach ($bookmarks as $bookmark)
-<div class="col-md-2-a p-1 remove box-post float-left {{ $bookmark->id_anime }}">
+<div class="box-bookmark-anime p-1 remove box-post float-left {{ $bookmark->id_anime }}">
     <div class="btn-close d-none" id="btn-close" data-anim="{{ $bookmark->id_anime }}">Delete X</div>
     <a href="{{ url('anime', $bookmark->id_anime) }}" title="{{ $bookmark->title_anime }}">
         <img src="{{ $bookmark->image_anime }}" title="{{ $bookmark->title_anime }}">
@@ -232,8 +229,7 @@
 
     @if ($bookmark->status_anime == 'Tamat')<div class="label-tamat text-white">Tamat</div>@else<div class="label-ongoing text-white">Ongoing</div>@endif
 
-    @php $episode = \DB::table('episode_animes')->where('id_anime', $bookmark->id_anime)->count(); @endphp
-    <div class="label-episode-right text-white">Episode {{ $episode }}</div>
+    <div class="label-episode-right text-white">Episode {{ \DB::table('episode_animes')->where('id_anime', $bookmark->id_anime)->count() }}</div>
 
     <div class="label-box">
         {!! App\Helpers\AnimeLabelHelper::instance()->label_hot($bookmark->id_anime) !!}

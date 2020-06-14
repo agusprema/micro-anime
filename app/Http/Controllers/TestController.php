@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Akaunting\Setting\Facade as Setting;
 use Analytics;
 use GuzzleHttp\Client;
+use App\history_users;
 
 class TestController extends Controller
 {
@@ -43,8 +44,11 @@ class TestController extends Controller
         };
 
         return $cart; */
-
-        return view('welcome');
+        $a = History_Users::where('id_user', '45873912')->latest();
+        foreach($a as $b) {
+            echo $b;
+        }
+        /* return view('welcome'); */
         /* Setting::set('lazy_load.status', 'false'); */
         /* Setting::set([
                 'bassic_settings'   => [

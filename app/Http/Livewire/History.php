@@ -31,9 +31,12 @@ class History extends Component
         $episode    = episode_animes::where('episode', $id_episode)->first();
 
         if($anime && $episode && Auth::check() && Auth::user()->hasVerifiedEmail()) {
+            $this->user         = Auth::user()->id_user;
+        }
+
+        if($anime && $episode) {
             $this->id_anime     = $this->RuleAnime($id_anime);
             $this->id_episode   = $id_episode;
-            $this->user         = Auth::user()->id_user;
             $this->ip_user      = Request::ip();
         }
     }
@@ -68,7 +71,9 @@ class History extends Component
                 $history_user_q->id_episode = $this->id_episode;
                 $history_user_q->save();
             }
+        }
 
+        if($this->id_episode && $this->id_anime){
             $this->HotView();
         }
     }
@@ -111,7 +116,7 @@ class History extends Component
 
     public function HotView()
     {
-        if(Auth::check() && Auth::user()->hasVerifiedEmail() && $this->id_episode && $this->id_anime)
+        if($this->id_episode && $this->id_anime)
         {
             $query_hot          = hot_animes::where('id_anime', $this->id_anime)->where('episode_anime', $this->id_episode)->where('ip_address', $this->ip_user)->where('season_anime', AnimeLabelHelper::instance()->season_anime())->latest()->first();
 

@@ -51,7 +51,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="{{ route('welcome') }}">
+                                    <a class="small" href="{{ route('home') }}">
                                         {{ __('Back to Home?') }}
                                     </a>
                                 </div>
